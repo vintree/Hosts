@@ -32,7 +32,8 @@ function traversePlugin(type, pluginsPath) {
                         version: packages.version, 
                         icons: packages.icons,
                         pluginPath: packages.pluginPath,
-                        outPath: packages.outPath
+                        outPath: packages.outPath,
+                        packagePath: pluginPackages
                     }
                     if(type === 'dev') {
                         config['dev'] = true,
@@ -42,7 +43,8 @@ function traversePlugin(type, pluginsPath) {
                     }
                     DBPlugin.addReleas(packages.name, config)
             } else {
-                console.error(`${pluginPath}/package.json文件不存在`);
+                console.warn(`${pluginPath}/package.json文件不存在`);
+                rm('-rf', `${pluginPath}`)
             }
 
             // fs.existsSync(`${pluginPath}/package.json`, (exists) => {
