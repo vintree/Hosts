@@ -64,7 +64,5 @@ module.exports = {
         new webpack.optimize.DedupePlugin(),
         new Clean(['./app', '']),
         new CopyWebpackPlugin(copyFile)
-
-        // new webpack.optimize.CommonsChunkPlugin('./dist/js/lib/common.js')
     ]
 }
