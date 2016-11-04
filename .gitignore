@@ -2,4 +2,3 @@ node_modules/
 src/
 *.log
 dist/
-asd/
