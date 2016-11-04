@@ -31476,7 +31476,7 @@
 
 	exports.default = {
 	    loading: function loading() {
-	        var state = arguments.length <= 0 || arguments[0] === undefined ? false : arguments[0];
+	        var state = arguments.length <= 0 || arguments[0] === undefined ? true : arguments[0];
 	        var action = arguments[1];
 
 	        switch (action.type) {
@@ -31631,7 +31631,7 @@
 
 
 	// module
-	exports.push([module.id, "@charset \"UTF-8\";\n/*\n    author: puxiao\n    time: 2016-10-05\n*/\n/*\n    creactor: puxiao.wh\n    time: 2016-8-19\n    des: 样式变量集\n*/\n*, *::before, *::after {\n  box-sizing: border-box; }\n\nhtml, body {\n  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  font-size: 14px;\n  color: #999; }\n\nul {\n  list-style: none;\n  padding: 0;\n  margin: 0; }\n\n.float-left {\n  float: left; }\n\n.float-right {\n  float: right; }\n\n.over-hide {\n  overflow: hidden; }\n\n.padding-left-1 {\n  padding-left: 1px; }\n\n.padding-left-3 {\n  padding-left: 3px; }\n\n.padding-left-5 {\n  padding-left: 5px; }\n\n.padding-left-7 {\n  padding-left: 7px; }\n\n.padding-left-9 {\n  padding-left: 9px; }\n\n.padding-left-10 {\n  padding-left: 10px; }\n\n.margin-right-1 {\n  margin-right: 1px; }\n\n.margin-right-3 {\n  margin-right: 3px; }\n\n.margin-right-5 {\n  margin-right: 5px; }\n\n.margin-right-7 {\n  margin-right: 7px; }\n\n.margin-right-9 {\n  margin-right: 9px; }\n\n.margin-right-10 {\n  margin-right: 10px; }\n\ninput, button, textarea, :focus {\n  outline: none; }\n\na:not([draggable=true]), img:not([draggable=true]) {\n  -webkit-user-drag: none;\n  user-drag: none;\n  /* Technically not supported in Electron yet */ }\n\na[href^=\"http://\"],\na[href^=\"https://\"],\na[href^=\"ftp://\"] {\n  -webkit-user-drag: auto;\n  user-drag: auto;\n  /* Technically not supported in Electron yet */ }\n\n.host-nav {\n  position: fixed;\n  min-width: 240px;\n  height: 100%; }\n\n.host-content {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 240px;\n  right: 0;\n  padding-right: 45px; }\n  .host-content .cm-s-default {\n    height: 100%;\n    background-color: #eaeaea; }\n    .host-content .cm-s-default .CodeMirror-line span {\n      font-weight: bold;\n      color: seagreen; }\n      .host-content .cm-s-default .CodeMirror-line span span:first-child {\n        font-weight: bold;\n        color: #a50; }\n      .host-content .cm-s-default .CodeMirror-line span .cm-error:first-child {\n        color: #f00;\n        font-weight: bold; }\n      .host-content .cm-s-default .CodeMirror-line span span {\n        font-weight: bold;\n        color: seagreen; }\n    .host-content .cm-s-default .CodeMirror-gutters {\n      z-index: 0; }\n\n.host-plugin {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  right: 0;\n  z-index: 999;\n  width: 45px;\n  background-color: #414755; }\n\n.host-loading {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 1.5px;\n  overflow: hidden;\n  display: none;\n  transition: all 2s; }\n  .host-loading.active {\n    display: block; }\n  .host-loading .loading-color {\n    position: fixed;\n    top: 0;\n    left: 0;\n    right: 0;\n    bottom: 0;\n    border-radius: 50%;\n    transform: rotate(0deg);\n    background: linear-gradient(to right, #ff7600, #00d0ff, #ff0040);\n    animation: rotate 10s infinite; }\n\n@keyframes rotate {\n  0% {\n    transform: rotate(0deg);\n    background: linear-gradient(to right, #00d0ff, #ff7600, #ff0040); }\n  50% {\n    transform: rotate(-260deg); }\n  100% {\n    transform: rotate(260deg);\n    background: linear-gradient(to right, #ff7600, #00d0ff, #ff0040); } }\n", ""]);
+	exports.push([module.id, "@charset \"UTF-8\";\n/*\n    author: puxiao\n    time: 2016-10-05\n*/\n/*\n    creactor: puxiao.wh\n    time: 2016-8-19\n    des: 样式变量集\n*/\n*, *::before, *::after {\n  box-sizing: border-box; }\n\nhtml, body {\n  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;\n  margin: 0;\n  padding: 0;\n  font-size: 14px;\n  color: #999; }\n\nul {\n  list-style: none;\n  padding: 0;\n  margin: 0; }\n\n.float-left {\n  float: left; }\n\n.float-right {\n  float: right; }\n\n.over-hide {\n  overflow: hidden; }\n\n.padding-left-1 {\n  padding-left: 1px; }\n\n.padding-left-3 {\n  padding-left: 3px; }\n\n.padding-left-5 {\n  padding-left: 5px; }\n\n.padding-left-7 {\n  padding-left: 7px; }\n\n.padding-left-9 {\n  padding-left: 9px; }\n\n.padding-left-10 {\n  padding-left: 10px; }\n\n.margin-right-1 {\n  margin-right: 1px; }\n\n.margin-right-3 {\n  margin-right: 3px; }\n\n.margin-right-5 {\n  margin-right: 5px; }\n\n.margin-right-7 {\n  margin-right: 7px; }\n\n.margin-right-9 {\n  margin-right: 9px; }\n\n.margin-right-10 {\n  margin-right: 10px; }\n\ninput, button, textarea, :focus {\n  outline: none; }\n\na:not([draggable=true]), img:not([draggable=true]) {\n  -webkit-user-drag: none;\n  user-drag: none;\n  /* Technically not supported in Electron yet */ }\n\na[href^=\"http://\"],\na[href^=\"https://\"],\na[href^=\"ftp://\"] {\n  -webkit-user-drag: auto;\n  user-drag: auto;\n  /* Technically not supported in Electron yet */ }\n\n.host-nav {\n  position: fixed;\n  min-width: 240px;\n  height: 100%; }\n\n.host-content {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  left: 240px;\n  right: 0;\n  padding-right: 45px; }\n  .host-content .cm-s-default {\n    height: 100%;\n    background-color: #eaeaea; }\n    .host-content .cm-s-default .CodeMirror-line span {\n      font-weight: bold;\n      color: seagreen; }\n      .host-content .cm-s-default .CodeMirror-line span span:first-child {\n        font-weight: bold;\n        color: #a50; }\n      .host-content .cm-s-default .CodeMirror-line span .cm-error:first-child {\n        color: #f00;\n        font-weight: bold; }\n      .host-content .cm-s-default .CodeMirror-line span span {\n        font-weight: bold;\n        color: seagreen; }\n\n.host-plugin {\n  position: fixed;\n  top: 0;\n  bottom: 0;\n  right: 0;\n  z-index: 999;\n  width: 45px;\n  background-color: #414755; }\n\n.host-loading {\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  height: 1.5px;\n  overflow: hidden;\n  display: none;\n  transition: all 2s; }\n  .host-loading.active {\n    display: block; }\n  .host-loading .loading-color {\n    position: fixed;\n    top: 0;\n    left: 240px;\n    right: 0;\n    bottom: 0;\n    border-radius: 50%;\n    transform: rotate(0deg);\n    background: linear-gradient(to right, #ff7600, #00d0ff, #ff0040);\n    animation: rotate 10s infinite; }\n\n@keyframes rotate {\n  0% {\n    transform: rotate(0deg);\n    background: linear-gradient(to right, #00d0ff, #ff7600, #ff0040); }\n  50% {\n    transform: rotate(-260deg); }\n  100% {\n    transform: rotate(260deg);\n    background: linear-gradient(to right, #ff7600, #00d0ff, #ff0040); } }\n", ""]);
 
 	// exports
 
@@ -89690,14 +89690,15 @@
 
 	var activeId = null;
 	var dragOverId = null;
-	var _dispatch = null;
 	var _type = null;
 
 	ipcRenderer.on('hostList', function (event, arg) {
-	    _dispatch((0, _root.updateHost)(arg.id, { switched: arg.switched }));
+	    var dispatch = window.store.dispatch;
+
+	    dispatch((0, _root.updateHost)(arg.id, { switched: arg.switched }));
 	    (0, _updateHost2.default)();
 	    if (_type === 'all') {
-	        _dispatch((0, _root.checkActiveHostAll)());
+	        dispatch((0, _root.checkActiveHostAll)());
 	    }
 	});
 
@@ -89792,11 +89793,15 @@
 	    }, {
 	        key: 'checkActiveHost',
 	        value: function checkActiveHost(id, e) {
-	            var dispatch = this.props.dispatch;
-	            // if click close out
+	            var _props = this.props;
+	            var dispatch = _props.dispatch;
+	            var activeHost = _props.activeHost;
 
-	            if (!e.target.isEqualNode(this.refs.close)) {
-	                dispatch((0, _root.checkActiveHost)(id));
+	            if (activeHost.get('data').get('id') !== id) {
+	                // if click close out
+	                if (!e.target.isEqualNode(this.refs.close)) {
+	                    dispatch((0, _root.checkActiveHost)(id));
+	                }
 	            }
 	        }
 	    }, {
@@ -89835,14 +89840,13 @@
 	            var id = _props$host.id;
 	            var name = _props$host.name;
 	            var switched = _props$host.switched;
-	            var _props = this.props;
-	            var dispatch = _props.dispatch;
-	            var activeHost = _props.activeHost;
+	            var _props2 = this.props;
+	            var dispatch = _props2.dispatch;
+	            var activeHost = _props2.activeHost;
 	            var _state = this.state;
 	            var inputType = _state.inputType;
 	            var isDrag = _state.isDrag;
 
-	            _dispatch = dispatch;
 	            if (id === undefined) return;
 	            activeHost = activeHost.toObject();
 	            var className = 'item';
@@ -89888,10 +89892,10 @@
 	    _createClass(List, [{
 	        key: 'render',
 	        value: function render() {
-	            var _props2 = this.props;
-	            var dispatch = _props2.dispatch;
-	            var hostList = _props2.hostList;
-	            var activeHost = _props2.activeHost;
+	            var _props3 = this.props;
+	            var dispatch = _props3.dispatch;
+	            var hostList = _props3.hostList;
+	            var activeHost = _props3.activeHost;
 
 	            var Lists = hostList.map(function (v, ix) {
 	                v = v.toObject();
