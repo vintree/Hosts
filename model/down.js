@@ -10,9 +10,22 @@ const {
     hideLoading 
 } = require('../src/js/actions/root')
 
+let isLoading = null
+
+const { dispatch } = window[packages.name]['store']
+
+function initLoading() {
+    setTimeout(() => {
+        if(isLoading !== null) {
+            dispatch(hideLoading())
+        }
+    }, 1000)
+}
 
 module.exports = function downloades(type, opt, url) {
     const { name, outPath } = opt
+    isLoading = true
+    initLoading()
     if(mkdir(outPath)) {
         var ghdownload = require('github-download')
         ghdownload(url, outPath)
@@ -31,7 +44,7 @@ module.exports = function downloades(type, opt, url) {
         .on('end', (end) => {
             switch(type) {
                 case 'plugin':
-                    const { dispatch } = window[packages.name]['store']
+                    isLoading = null
                     allPlugin()
                     setTimeout(() => {
                         dispatch(checkAllPlugin())
