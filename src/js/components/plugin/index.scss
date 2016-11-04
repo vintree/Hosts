@@ -1,0 +1,149 @@
+@import '../../../sass/variable.scss';
+@import '../../../sass/mixin.scss';
+._plugin {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    .plus-container {
+        width: 45px;
+        @include line-height(45px);
+        text-align: center;
+        font-size: 20px;
+        cursor: pointer;
+        &:hover {
+            color: #fff;
+        }
+        .plus-mask {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+        .plus {
+            font-size: 20px;
+            &.active {
+                color: #fff;
+            }
+        }
+        .console {
+            position: fixed;
+            top: 40px;
+            left: 305px;
+            right: 85px;
+            @include line-height(60px);
+            background-color: #333333;
+            z-index: 999;
+            box-shadow: 0 0 50px #c3c3c3;
+            border-radius: 2px;
+            &.hide {
+                display: none;
+            }
+            .command {
+                background-color: transparent;
+                width: 100%;
+                height: 100%;
+                border: 0;
+                padding: 0 20px;
+                font-size: 20px;
+                color: #dadada;
+                &::-webkit-input-placeholder  {
+                    color: #888888;
+                }
+            }
+        }
+    }
+    .icons {
+        position: relative;
+        padding: 5px;
+        width: 45px;
+        @include line-height(45px);
+        cursor: pointer;
+        -webkit-user-select: none;
+        user-select: none;
+        .dev {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: #c56c1a;
+            text-align: center;
+        }
+        &.active {
+            background-color: #333743;
+        }
+        &:hover {
+            .mask {
+                background-color: transparent;
+            }
+            .plugin-close {
+                display: block;
+            }
+        }
+        img {
+            width: 100%;
+            height: 100%;
+        }
+        .plugin-close {
+            display: none;
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            line-height: 20px;
+            color: #961313;
+            &:hover {
+                color: #ea1d1d;
+            }
+        }
+        .mask {
+            position: absolute;
+            top: 5px;
+            bottom: 5px;
+            left: 5px;
+            right: 5px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+        }
+    }
+    .pool {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        right: 45px;
+        width: 50%;
+        min-width: 260px;
+        background-color: #fff;
+        box-shadow: 1px 0 5px #3c3c3c;
+        &.hide {
+            display: none;
+        }
+        .pool-header {
+            height: 40px;
+            line-height: 30px;
+            padding: 5px;
+            .header-icons {
+                float: left;
+                width: 30px;
+                line-height: 30px;
+                margin-right: 10px;
+            }
+            .header-name {
+                color: #6b6b6b;
+                font-size: 20px;
+                margin-right: 5px;
+                text-transform:capitalize;
+            }
+        }
+        .pool-main {
+            position: absolute;
+            top: 40px;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    }
+}

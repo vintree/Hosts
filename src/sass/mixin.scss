@@ -1,0 +1,45 @@
+@mixin line-height($n: 0) {
+    height: $n;
+    line-height: $n;
+}
+
+@mixin square($n: 0) {
+    width: $n;
+    height: $n;
+}
+
+@mixin center($n: 0) {
+    text-align: center;
+    @include line-height($n);
+}
+
+@mixin center-table() {
+    display: table;
+}
+
+@mixin center-cell() {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+@mixin overflow-ellipsis() {
+    white-space:nowrap; 
+    overflow:hidden; 
+    text-overflow:ellipsis;
+}
+
+@mixin border($orien: bottom, $width: 1px, $color : $color-grey-border) {
+    @if $orien == top {
+        border-top: $width solid $color;
+    }
+    @else if $orien == bottom {
+        border-bottom: $width solid $color;
+    }
+    @else if $orien == left {
+        border-left: $width solid $color;
+    }
+    @else if $orien == right {
+        border-right: $width solid $color;
+    }
+}

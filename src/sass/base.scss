@@ -1,0 +1,104 @@
+/*
+    author: puxiao
+    time: 2016-10-05
+*/
+@import './variable.scss';
+@import './mixin.scss';
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+    color: #999;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.float-left {
+    float: left;
+}
+
+.float-right {
+    float: right;
+}
+
+// over
+
+.over-hide {
+    overflow: hidden;
+}
+
+// padding
+
+.padding-left-1 {
+    padding-left: 1px;
+}
+
+.padding-left-3 {
+    padding-left: 3px;
+}
+
+.padding-left-5 {
+    padding-left: 5px;
+}
+
+.padding-left-7 {
+    padding-left: 7px;
+}
+
+.padding-left-9 {
+    padding-left: 9px;
+}
+
+.padding-left-10 {
+    padding-left: 10px;
+}
+
+.margin-right-1 {
+    margin-right: 1px;
+}
+
+.margin-right-3 {
+    margin-right: 3px;
+}
+
+.margin-right-5 {
+    margin-right: 5px;
+}
+
+.margin-right-7 {
+    margin-right: 7px;
+}
+
+.margin-right-9 {
+    margin-right: 9px;
+}
+
+.margin-right-10 {
+    margin-right: 10px;
+}
+
+// -------------------
+input, button, textarea, :focus {
+    outline: none; // You should add some other style for :focus to help UX/a11y
+} 
+
+a:not([draggable=true]), img:not([draggable=true]) {
+    -webkit-user-drag: none;
+    user-drag: none; /* Technically not supported in Electron yet */
+}
+a[href^="http://"],
+a[href^="https://"],
+a[href^="ftp://"] {
+    -webkit-user-drag: auto;
+    user-drag: auto; /* Technically not supported in Electron yet */
+}
