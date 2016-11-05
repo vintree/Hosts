@@ -10,8 +10,9 @@ const { rm } = require('shelljs')
 const {
     checkAllPlugin,
     delReleasPlugin,
+    exchangePlugin,
     showLoading,
-    hideLoading
+    hideLoading,
 } = require('../../actions/root')
 const IT = require('immutable')
 let awaitId = null
@@ -59,9 +60,8 @@ class Index extends Component {
         })
     }
     handleDragEnd(id, e) {
-        this.setState({
-            pluginReleasTotal: DBPlugin.exchange(id, awaitId)
-        })
+        const { dispatch } = this.props
+        dispatch(exchangePlugin(id, awaitId))
     }
     handleActivePlus() {
         const { isPlus } = this.state

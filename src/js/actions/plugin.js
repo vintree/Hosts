@@ -8,7 +8,11 @@ import {
     CHACK_DEV_PLUGIN
 } from '../constants/plugin.js'
 
-import { checkReleasAll, checkDevAll } from '../../../db-model/plugin'
+import { 
+    checkReleasAll,
+    checkDevAll,
+    exchange
+} from '../../../db-model/plugin'
 const { delPlugin } = require('../../../model/plugin/core')
 const { allPlugin } = require('../../../model/plugin/core')
 export default {
@@ -24,6 +28,12 @@ export default {
             type: CHACK_ALL_PLUGIN,
             pluginReleasTotal: checkReleasAll(),
             pluginDevTotal: checkDevAll()
+        }
+    },
+    exchangePlugin: (id, currentId) => {
+        return {
+            type: EXCHANGE_PLUGIN,
+            pluginReleasTotal: exchange(id, currentId)
         }
     }
 }
