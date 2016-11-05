@@ -15,18 +15,19 @@ const {
 
 let isLoading = null
 
-const { dispatch } = window[packages.name] ? window[packages.name]['store'] : ''
-
+let _dispatch
 function initLoading() {
     setTimeout(() => {
         if(isLoading !== null) {
-            dispatch(hideLoading())
+            _dispatch(hideLoading())
         }
     }, 1000)
 }
 
 module.exports = function downloades(type, opt, url) {
     const { name, outPath } = opt
+    _dispatch = window[packages.name] ? window[packages.name]['store']['dispatch'] : ''
+    console.log('_dispatch', _dispatch);
     if(type === 'plugin') {
         isLoading = true
         initLoading()
@@ -51,8 +52,8 @@ module.exports = function downloades(type, opt, url) {
                         isLoading = null
                         allPlugin()
                         setTimeout(() => {
-                            dispatch(checkAllPlugin())
-                            dispatch(hideLoading())
+                            _dispatch(checkAllPlugin())
+                            _dispatch(hideLoading())
                         }, 0)
                         break
                     default:
@@ -61,7 +62,6 @@ module.exports = function downloades(type, opt, url) {
             })
         }
     } else {
-        console.log('download');
         fileDownload(url, {
             directory: outPath,
             filename: name
@@ -69,12 +69,5 @@ module.exports = function downloades(type, opt, url) {
             if (err) throw err
             console.log("meow")
         })
-
-
-
-        // download(url).then(data => {
-        //     fs.writeFileSync(`${outPath}/${name}`, data)
-        // })
     }
-    
 }

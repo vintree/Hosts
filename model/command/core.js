@@ -13,9 +13,9 @@ module.exports = function init(command) {
     if(command !== '') {
         let cmd = command.match(/(\S+)/ig)
         if(cmd[0].toLowerCase() === 'p') {
-            let packagePath = path.join(userData, 'Plugin')
+            let packagePath = path.join(userData, 'Configs')
             if(mkdir(packagePath)) {
-                let packages = fs.readFileSync(`${packagePath}/package.json`, 'utf-8')
+                let packages = fs.readFileSync(`${packagePath}/plugin.json`, 'utf-8')
                 packages = JSON.parse(packages)
                 let url = packages['plugin'][cmd[1]]
                 let tag = url ? 'package' : 'git'

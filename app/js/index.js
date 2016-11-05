@@ -32302,11 +32302,11 @@
 
 	    var download = __webpack_require__(167);
 	    var tempOpt = {
-	        name: 'sss.js',
-	        outPath: userData + '/git-test'
+	        name: 'plugin.json',
+	        outPath: userData + '/Configs'
 	    };
 	    // console.log('download', download);
-	    download('test', tempOpt, 'https://github.com/wuguzi/Hosts/blob/master/webpack.config.js');
+	    download('test', tempOpt, 'https://raw.githubusercontent.com/wuguzi/Hosts/master/Configs/plugin.json');
 
 	    return {
 	        releas: DBPlugin.checkReleasAll(),
@@ -32362,9 +32362,9 @@
 	    if (command !== '') {
 	        var cmd = command.match(/(\S+)/ig);
 	        if (cmd[0].toLowerCase() === 'p') {
-	            var packagePath = path.join(userData, 'Plugin');
+	            var packagePath = path.join(userData, 'Configs');
 	            if (mkdir(packagePath)) {
-	                var packages = fs.readFileSync(packagePath + '/package.json', 'utf-8');
+	                var packages = fs.readFileSync(packagePath + '/plugin.json', 'utf-8');
 	                packages = JSON.parse(packages);
 	                var url = packages['plugin'][cmd[1]];
 	                var tag = url ? 'package' : 'git';
@@ -39283,15 +39283,11 @@
 
 	var isLoading = null;
 
-	var _ref = window[packages.name] ? window[packages.name]['store'] : '';
-
-	var dispatch = _ref.dispatch;
-
-
+	var _dispatch = void 0;
 	function initLoading() {
 	    setTimeout(function () {
 	        if (isLoading !== null) {
-	            dispatch(hideLoading());
+	            _dispatch(hideLoading());
 	        }
 	    }, 1000);
 	}
@@ -39300,6 +39296,8 @@
 	    var name = opt.name;
 	    var outPath = opt.outPath;
 
+	    _dispatch = window[packages.name] ? window[packages.name]['store']['dispatch'] : '';
+	    console.log('_dispatch', _dispatch);
 	    if (type === 'plugin') {
 	        isLoading = true;
 	        initLoading();
@@ -39320,8 +39318,8 @@
 	                        isLoading = null;
 	                        allPlugin();
 	                        setTimeout(function () {
-	                            dispatch(checkAllPlugin());
-	                            dispatch(hideLoading());
+	                            _dispatch(checkAllPlugin());
+	                            _dispatch(hideLoading());
 	                        }, 0);
 	                        break;
 	                    default:
@@ -39330,7 +39328,6 @@
 	            });
 	        }
 	    } else {
-	        console.log('download');
 	        fileDownload(url, {
 	            directory: outPath,
 	            filename: name
@@ -39338,10 +39335,6 @@
 	            if (err) throw err;
 	            console.log("meow");
 	        });
-
-	        // download(url).then(data => {
-	        //     fs.writeFileSync(`${outPath}/${name}`, data)
-	        // })
 	    }
 	};
 

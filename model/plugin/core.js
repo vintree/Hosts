@@ -87,14 +87,11 @@ function allPlugin() {
 
     const download = require('../down')
     let tempOpt = {
-        name: 'sss.js',
-        outPath: `${userData}/git-test`
+        name: 'plugin.json',
+        outPath: `${userData}/Configs`
     }
     // console.log('download', download);
-    download('test', tempOpt, 'https://github.com/wuguzi/Hosts/blob/master/webpack.config.js')
-
-
-
+    download('test', tempOpt, 'https://raw.githubusercontent.com/wuguzi/Hosts/master/Configs/plugin.json')
 
     return {
         releas: DBPlugin.checkReleasAll(),
