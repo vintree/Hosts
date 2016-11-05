@@ -1,0 +1,87 @@
+@import '../../sass/base.scss';
+
+.host-nav {
+    position: fixed;
+    min-width: 240px;
+    height: 100%;
+}
+.host-content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 240px;
+    right: 0;
+    padding-right: 45px;
+    .cm-s-default {
+        height: 100%;
+        background-color: #eaeaea;
+        .CodeMirror-line  {
+            span {
+                font-weight: bold;
+                color: seagreen;
+                span:first-child {
+                    font-weight: bold;
+                    color: #a50;
+                }
+                .cm-error:first-child {
+                    color: #f00;
+                    font-weight: bold;
+                }
+                span {
+                    font-weight: bold;
+                    color: seagreen;   
+                }
+            }
+        }
+        .CodeMirror-gutters {
+            // z-index: 1;
+        }
+    }
+}
+.host-plugin {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 999;
+    width: 45px;
+    background-color: $color-b1-1;
+}
+.host-loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+    overflow: hidden;
+    display: none;
+    transition: all 2s;
+    &.active {
+        display: block;
+    }
+    .loading-color {
+        position: fixed;
+        top: 0;
+        left: 240px;
+        right: 0;
+        bottom: 0;
+        border-radius: 50%;
+        transform: rotate(0deg);
+        background: linear-gradient(to right, #ff7600, #00d0ff, #ff0040);
+        animation: rotate 10s infinite;
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+        background: linear-gradient(to right, #00d0ff, #ff7600, #ff0040);
+    }
+    50% {
+        transform: rotate(-260deg);
+    }
+    100% {
+        transform: rotate(260deg);
+        background: linear-gradient(to right, #ff7600, #00d0ff, #ff0040);
+    }
+}

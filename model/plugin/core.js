@@ -12,6 +12,8 @@ const { defaultDirPath } = require('../main')
 const mkdir = require('../mkdir')
 const { rm } = require('shelljs')
 
+
+
 function traversePlugin(type, pluginsPath) {
     let pluginList = fs.readdirSync(pluginsPath)
     pluginList.map((plugin, i) => {
@@ -80,10 +82,26 @@ function traversePlugin(type, pluginsPath) {
 function allPlugin() {
     traversePlugin('releas', defaultDirPath()['Plugin'])
     traversePlugin('dev', defaultDirPath()['DevPlugin'])
+
+
+
+    const download = require('../down')
+    let tempOpt = {
+        name: 'sss.js',
+        outPath: `${userData}/git-test`
+    }
+    // console.log('download', download);
+    download('test', tempOpt, 'https://github.com/wuguzi/Hosts/blob/master/webpack.config.js')
+
+
+
+
     return {
         releas: DBPlugin.checkReleasAll(),
         dev: DBPlugin.checkDevAll()
     }
+
+
 }
 
 
