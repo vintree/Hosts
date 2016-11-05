@@ -13,9 +13,6 @@ const path = require('path')
 const packages = require('./package')
 const ipAdress = require('./model/ip-adress')
 
-
-// const { allPlugin } = require('./model/plugin/core')
-// allPlugin()
 let win = null
 let isQuit = false
 function createWindow() {
@@ -71,7 +68,7 @@ app.on('window-all-closed', () => {
 });
 
 app.on('activate', () => {
-// 对于OS X系统，当dock图标被点击后会重新创建一个app窗口，并且不会有其他
+    // 对于OS X系统，当dock图标被点击后会重新创建一个app窗口，并且不会有其他
     if (win === null) {
         createWindow()
     } else {
