@@ -90,7 +90,7 @@ function allPlugin() {
         name: 'plugin.json',
         outPath: `${userData}/Configs`
     }
-    // console.log('download', download);
+
     download('test', tempOpt, 'https://raw.githubusercontent.com/wuguzi/Hosts/master/Configs/plugin.json')
 
     return {
@@ -111,7 +111,6 @@ function delPlugin(id) {
     const plugin = DBPlugin.delReleas(id)
     let pluginPath = plugin[0][0].config.pluginPath 
     pluginPath = pluginPath.replace(/Application/, 'Application\\')
-    console.log('pluginPath', pluginPath);
     const exec = require('child_process').exec
     const child = exec(`rm -rf ${pluginPath}`, (error, stdout, stderr) => {
         if(error !== null) {

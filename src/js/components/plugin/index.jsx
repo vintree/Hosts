@@ -110,12 +110,6 @@ class Index extends Component {
             const pluginPath = plugin.get('config').get('pluginPath')
             const packagePath = plugin.get('config').get('packagePath')
             const id = plugin.get('id')
-
-            // console.log('existsSync', packagePath, fs.existsSync(packagePath));
-            // fs.exists(packagePath, (exists) => {
-            //     console.log('exists', exists);
-            // })
-
             if(fs.existsSync(packagePath)) {
                 let iconClassName = (isPoolShow && plugin.get('name') === currentPlugin.get('name')) ? 'icons active' : 'icons'
                 if(type === 'dev') {

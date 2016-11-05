@@ -27,7 +27,6 @@ function initLoading() {
 module.exports = function downloades(type, opt, url) {
     const { name, outPath } = opt
     _dispatch = window[packages.name] ? window[packages.name]['store']['dispatch'] : ''
-    console.log('_dispatch', _dispatch);
     if(type === 'plugin') {
         isLoading = true
         initLoading()
@@ -67,7 +66,6 @@ module.exports = function downloades(type, opt, url) {
             filename: name
         }, (err) => {
             if (err) throw err
-            console.log("meow")
         })
     }
 }
