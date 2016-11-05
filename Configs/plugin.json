@@ -1,7 +1,8 @@
 {
 	"plugin": {
 		"ping": "git@github.com:wuguzi/Hosts-Ping.git",
-		"qrcode": "git@github.com:wuguzi/Hosts-Qrcode.git"
+		"qrcode": "git@github.com:wuguzi/Hosts-Qrcode.git",
+		"test": "test"
 	},
 	"dev": false
 }
