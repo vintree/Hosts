@@ -59,7 +59,7 @@ module.exports = function downloades(type, opt, url) {
                 }
             })
         }
-    } else {
+    } else if(type === 'config') {
         fileDownload(url, {
             directory: outPath,
             filename: name

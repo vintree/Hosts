@@ -6,6 +6,7 @@
 const electron = require('electron')
 const userData = electron.remote.app.getPath('userData')
 const mkdir = require('./mkdir')
+const download = require('./down')
 // const DBHost = require('../db-model/host')
 // const DBPlugin = require('../db-model/plugin')
 function defaultDirPath() {
@@ -34,11 +35,27 @@ function initPlugin() {
     Plugin.allPlugin()
 }
 
+function initConfig() {
+    let tempOpts = [{
+        name: 'plugins.json',
+        outPath: `${userData}/Configs`,
+        url: "https://raw.githubusercontent.com/wuguzi/Hosts/master/Configs/plugin.json"
+    },{
+        name: 'updates.json',
+        outPath: `${userData}/Configs`,
+        url: "https://raw.githubusercontent.com/wuguzi/Hosts/master/Configs/plugin.json"
+    }]
+    tempOpts.forEach((tempOpt, i) => {
+        download('config', tempOpt, tempOpt.url)
+    })
+}
+
 module.exports = {
     init: function() {
         createDir()
         createTable()
         initPlugin()
+        initConfig()
     },
     defaultDirPath
 }

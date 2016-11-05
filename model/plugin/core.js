@@ -82,23 +82,10 @@ function traversePlugin(type, pluginsPath) {
 function allPlugin() {
     traversePlugin('releas', defaultDirPath()['Plugin'])
     traversePlugin('dev', defaultDirPath()['DevPlugin'])
-
-
-
-    const download = require('../down')
-    let tempOpt = {
-        name: 'plugin.json',
-        outPath: `${userData}/Configs`
-    }
-
-    download('test', tempOpt, 'https://raw.githubusercontent.com/wuguzi/Hosts/master/Configs/plugin.json')
-
     return {
         releas: DBPlugin.checkReleasAll(),
         dev: DBPlugin.checkDevAll()
     }
-
-
 }
 
 
