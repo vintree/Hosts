@@ -31,7 +31,7 @@ export default {
     exchangeHost: (id1, id2) => {
         return {
             type: EXCHANGE_HOST,
-            hostList: DBHost.exchange(id1, id2)['1']
+            hostList: DBHost.exchange(id1, id2)
         }
     }
 }

@@ -113,7 +113,7 @@ class Item extends Component {
     handleDrop(e) {
         const { dispatch } = this.props
         const { id } = this.props.host
-        dispatch( exchangeHost(id, dragOverId) )
+        dispatch(exchangeHost(id, dragOverId))
         if(_type === 'all') {
             dispatch(checkActiveHostAll())
         }
