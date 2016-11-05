@@ -1,0 +1,15 @@
+{
+    "version": "0.1.0",
+    "urls": {
+        "plugin": {
+            "name": "plugins.json",
+            "relativePath": "Configs",
+            "url": "https://raw.githubusercontent.com/wuguzi/Hosts/master/Configs/main.json"
+        },
+        "updates": {
+            "name": "updates.json",
+            "relativePath": "Configs",
+            "url": "https://raw.githubusercontent.com/wuguzi/Hosts/master/updates/main.json"
+        }
+    }
+}
