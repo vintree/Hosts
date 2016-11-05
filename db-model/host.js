@@ -44,7 +44,7 @@ function defaultValue(name, content = '') {
 }
 
 function defaultReturn(value) {
-    if(!db.has('host').value()) {
+    if(!db.has(TABLE_HOST_NAME).value()) {
         createHost()
     }
     if(ipcRenderer !== undefined) {
@@ -72,7 +72,6 @@ function addHost(name) {
         createHost()
     }
     const content = `# ${name}\n# ${time.localFullTime()}\n\n`
-
     return defaultReturn(db.get(TABLE_HOST_NAME)
     .push(defaultValue(name, content))
     .value())
@@ -119,9 +118,7 @@ function exchange(id, currentId) {
     //     exchangeTag: false
     // }).assign(host2.toObject()).value()
     // db.get(TABLE_HOST_NAME).find({id: id1}).assign({exchangeTag: false}).value()
-
     // return defaultReturn()
-
     const hostList = defaultReturn()[1]
     const exchanges = require('../model/exchange')
     let tempHostList
@@ -138,12 +135,7 @@ function exchange(id, currentId) {
         }
     }
     tempHostList = exchanges(ix, currentIx, [].concat(hostList))
-    
-    
     return db.set(TABLE_HOST_NAME, tempHostList).value()[TABLE_HOST_NAME]
-
-    
-
 }
 
 module.exports =  {

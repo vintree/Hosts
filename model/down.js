@@ -8,7 +8,7 @@ const command = require('./command/core')
 const mkdir = require('./mkdir')
 const {allPlugin} = require('./plugin/core')
 const packages = require('../package.json')
-const { 
+const {
     checkAllPlugin,
     hideLoading 
 } = require('../src/js/actions/root')
@@ -21,7 +21,7 @@ function initLoading() {
         if(isLoading !== null) {
             _dispatch(hideLoading())
         }
-    }, 1000)
+    }, 120000)
 }
 
 module.exports = function downloades(type, opt, url) {
@@ -31,7 +31,6 @@ module.exports = function downloades(type, opt, url) {
         isLoading = true
         initLoading()
         if(mkdir(outPath)) {
-            // const ghdownload = require('github-download')
             githubDownload(url, outPath)
             .on('dir', (dir) => {
                 console.log(dir)
