@@ -3,12 +3,9 @@ const packages = require('./package')
 const path = require('path');
 const ipAdress = require('./model/ip-adress')
 const { app, Tray, Menu, ipcMain, clipboard } = electron
-
-var iconPath = path.join(__dirname, 'build/Mac/icon_16x16@2x.png') 
-
-var tray = new Tray(iconPath);
+const iconPath = path.join(__dirname, 'icon_16x16@2x.png')
+const tray = new Tray(iconPath);
 let template = []
-
 let tempEvent = null
 let tempArg = null
 let isRefresh = null
