@@ -15,28 +15,6 @@ const mkdir = require('../model/mkdir')
 const DBPatch = `${userData}/db`
 const DBFile = `${DBPatch}/plugin.json`
 
-// function mkdirsSync(dirpath, mode) {
-//     if (!fs.existsSync(dirpath)) {
-//         var pathtmp = '/'
-//         dirpath.split(path.sep).forEach(function(dirname) {
-//             if (pathtmp) {
-//                 pathtmp = path.join(pathtmp, dirname);
-//             }
-//             else {
-//                 pathtmp = dirname;
-//             }
-//             if(pathtmp !== '') {
-//                 if (!fs.existsSync(pathtmp)) {
-//                     if (!fs.mkdirSync(pathtmp, mode)) {
-//                         return false;
-//                     }
-//                 }
-//             }
-//         });
-//     }
-//     return true;
-// }
-
 mkdir(DBPatch)
 
 const db = low(DBFile, {
@@ -195,25 +173,6 @@ function exchange(id, currentId) {
     tempPluginList = exchanges(ix, currentIx, [].concat(pluginList))
     return db.set(TABLE_RELEAS_NAME, tempPluginList).value()[TABLE_RELEAS_NAME]
 }
-
-
-// function test(ix, currentId) {
-//     var arr = [0, 1, 2, 3, 4, 5, 6, 7]
-//     var tempPlugin = arr[ix]
-//     var i = ix
-//     if(ix < currentId) {
-//         for(let l = currentId; i < l; i++) {
-//             arr[i] = arr[i + 1]
-//         }
-//     } else {
-//         for(let l = currentId; i > l; i--) {
-//             arr[i] = arr[i - 1]
-//         }
-//     }
-//     arr[i] = tempPlugin
-
-//     return arr
-// }
 
 // function exchange1(id1, id2) {
 //     let host1 = db.get(TABLE_RELEAS_NAME).filter({id: id1}).value()[0]

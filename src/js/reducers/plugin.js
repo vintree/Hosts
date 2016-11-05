@@ -1,7 +1,8 @@
 import IT from 'immutable'
 import {
     CHACK_ALL_PLUGIN,
-    DEL_RELEAS_PLUGIN
+    DEL_RELEAS_PLUGIN,
+    EXCHANGE_PLUGIN
 } from '../constants/plugin'
 
 import DBHost from '../../../db-model/host.js'
@@ -21,6 +22,8 @@ export default {
                     pluginReleasTotal: action.pluginReleasTotal,
                     pluginDevTotal: action.pluginDevTotal
                 })
+            case EXCHANGE_PLUGIN:
+                return state.set('pluginReleasTotal', IT.fromJS(action.pluginReleasTotal))
             default: 
                 return IT.fromJS(state)
         }

@@ -1,5 +1,5 @@
 const { Component } = React
-import ipAdress from '../../../../model/ip-adress'
+const ipAdress = require('../../../../model/ip-adress')
 
 export default class Index extends Component {
     constructor(props) {
@@ -9,7 +9,6 @@ export default class Index extends Component {
             isRefreshActive: false
         }
     }
-
     refreshIpAdress() {
         console.log(ipAdress());
         this.setState({
@@ -23,7 +22,6 @@ export default class Index extends Component {
             })
         }.bind(this), 200)
     }
-
     render() {
         const { ipAdress, isRefreshActive } = this.state
         let ipAdressStyle = ipAdress ? 'footer online' : 'footer unOnline'

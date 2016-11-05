@@ -82,26 +82,10 @@ function traversePlugin(type, pluginsPath) {
 function allPlugin() {
     traversePlugin('releas', defaultDirPath()['Plugin'])
     traversePlugin('dev', defaultDirPath()['DevPlugin'])
-
-
-
-    const download = require('../down')
-    let tempOpt = {
-        name: 'sss.js',
-        outPath: `${userData}/git-test`
-    }
-    // console.log('download', download);
-    download('test', tempOpt, 'https://github.com/wuguzi/Hosts/blob/master/webpack.config.js')
-
-
-
-
     return {
         releas: DBPlugin.checkReleasAll(),
         dev: DBPlugin.checkDevAll()
     }
-
-
 }
 
 
@@ -114,7 +98,6 @@ function delPlugin(id) {
     const plugin = DBPlugin.delReleas(id)
     let pluginPath = plugin[0][0].config.pluginPath 
     pluginPath = pluginPath.replace(/Application/, 'Application\\')
-    console.log('pluginPath', pluginPath);
     const exec = require('child_process').exec
     const child = exec(`rm -rf ${pluginPath}`, (error, stdout, stderr) => {
         if(error !== null) {

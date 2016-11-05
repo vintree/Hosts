@@ -1,6 +1,6 @@
-import './index.scss'
+require('./index.scss') 
 const { Component } = React
-import { connect } from 'react-redux'
+const { connect } = require('react-redux')
 const { allPlugin, addPlugin, delPlugin } = require('../../../../model/plugin/core')
 const DBPlugin = require('../../../../db-model/plugin')
 const command = require('../../../../model/command/core')
@@ -10,11 +10,12 @@ const { rm } = require('shelljs')
 const {
     checkAllPlugin,
     delReleasPlugin,
+    exchangePlugin,
     showLoading,
-    hideLoading
+    hideLoading,
 } = require('../../actions/root')
 const IT = require('immutable')
-let awaitId = null
+let currentId = null
 
 class Index extends Component {
     constructor(props) {
@@ -51,7 +52,7 @@ class Index extends Component {
         this.setState(state)
     }
     handleDragOver(id, e) {
-        awaitId = id
+        currentId = id
     }
     handleDragLeave(e) {
         this.setState({
@@ -59,9 +60,8 @@ class Index extends Component {
         })
     }
     handleDragEnd(id, e) {
-        this.setState({
-            pluginReleasTotal: DBPlugin.exchange(id, awaitId)
-        })
+        const { dispatch } = this.props
+        dispatch(exchangePlugin(id, currentId))
     }
     handleActivePlus() {
         const { isPlus } = this.state
@@ -110,12 +110,6 @@ class Index extends Component {
             const pluginPath = plugin.get('config').get('pluginPath')
             const packagePath = plugin.get('config').get('packagePath')
             const id = plugin.get('id')
-
-            // console.log('existsSync', packagePath, fs.existsSync(packagePath));
-            // fs.exists(packagePath, (exists) => {
-            //     console.log('exists', exists);
-            // })
-
             if(fs.existsSync(packagePath)) {
                 let iconClassName = (isPoolShow && plugin.get('name') === currentPlugin.get('name')) ? 'icons active' : 'icons'
                 if(type === 'dev') {
@@ -140,7 +134,6 @@ class Index extends Component {
                 rm('-rf', pluginPath)
                 return ''
             }
-            
         })
     }
     render() {
@@ -182,7 +175,7 @@ class Index extends Component {
                         isPlus ? (<div className="plus-mask"></div>) : ''
                     }
                     <div className={consoleClassName}>
-                        <input className="command" type="text" placeholder="命令行" defaultValue="p qrcode" ref="command" onBlur={this.handleHidePlus.bind(this)} onKeyUp={this.handleCommand.bind(this)} />
+                        <input className="command" type="text" placeholder="命令行" ref="command" onBlur={this.handleHidePlus.bind(this)} onKeyUp={this.handleCommand.bind(this)} />
                     </div>
                 </div>
                 {pluginList.dev}

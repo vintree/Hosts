@@ -13,31 +13,8 @@ const packages = require('../package.json')
 const mkdir = require('../model/mkdir')
 const TABLE_HOST_NAME = 'host'
 const userData = electron.remote.app.getPath('userData')
-
 const DBPatch = `${userData}/db`
 const DBFile = `${DBPatch}/host.json`
-
-// function mkdirsSync(dirpath, mode) {
-//     if (!fs.existsSync(dirpath)) {
-//         var pathtmp = '/'
-//         dirpath.split(path.sep).forEach(function(dirname) {
-//             if (pathtmp) {
-//                 pathtmp = path.join(pathtmp, dirname);
-//             }
-//             else {
-//                 pathtmp = dirname;
-//             }
-//             if(pathtmp !== '') {
-//                 if (!fs.existsSync(pathtmp)) {
-//                     if (!fs.mkdirSync(pathtmp, mode)) {
-//                         return false;
-//                     }
-//                 }
-//             }
-//         });
-//     }
-//     return true;
-// }
 
 mkdir(DBPatch)
 
@@ -67,7 +44,7 @@ function defaultValue(name, content = '') {
 }
 
 function defaultReturn(value) {
-    if(!db.has('host').value()) {
+    if(!db.has(TABLE_HOST_NAME).value()) {
         createHost()
     }
     if(ipcRenderer !== undefined) {
@@ -95,7 +72,6 @@ function addHost(name) {
         createHost()
     }
     const content = `# ${name}\n# ${time.localFullTime()}\n\n`
-
     return defaultReturn(db.get(TABLE_HOST_NAME)
     .push(defaultValue(name, content))
     .value())
@@ -127,25 +103,39 @@ function checkActiveAll() {
     .filter({switched: true}).value())['0']
 }
 
-function exchange(id1, id2) {
-    let host1 = db.get(TABLE_HOST_NAME).filter({id: id1}).value()[0]
-    host1 = IT.fromJS(host1)
-    host1 = host1.set('exchangeTag', true)    
-    let host2 = db.get(TABLE_HOST_NAME).filter({id: id2}).value()[0]
-    host2 = IT.fromJS(host2)
-
-    db.get(TABLE_HOST_NAME).find({
-        id: id2,
-    }).assign(host1.toObject()).value()
-
-    db.get(TABLE_HOST_NAME).find({
-        id: id1,
-        exchangeTag: false
-    }).assign(host2.toObject()).value()
-
-    db.get(TABLE_HOST_NAME).find({id: id1}).assign({exchangeTag: false}).value()
-
-    return defaultReturn()
+// id1, id2, 
+function exchange(id, currentId) {
+    // let host1 = db.get(TABLE_HOST_NAME).filter({id: id1}).value()[0]
+    // host1 = IT.fromJS(host1)
+    // host1 = host1.set('exchangeTag', true)    
+    // let host2 = db.get(TABLE_HOST_NAME).filter({id: id2}).value()[0]
+    // host2 = IT.fromJS(host2)
+    // db.get(TABLE_HOST_NAME).find({
+    //     id: id2,
+    // }).assign(host1.toObject()).value()
+    // db.get(TABLE_HOST_NAME).find({
+    //     id: id1,
+    //     exchangeTag: false
+    // }).assign(host2.toObject()).value()
+    // db.get(TABLE_HOST_NAME).find({id: id1}).assign({exchangeTag: false}).value()
+    // return defaultReturn()
+    const hostList = defaultReturn()[1]
+    const exchanges = require('../model/exchange')
+    let tempHostList
+    let ix = null
+    let currentIx = null
+    for(let i = 0, l = hostList.length; i < l; i++) {
+        if(hostList[i]['id'] === id) {
+            ix = i
+        } else if(hostList[i]['id'] === currentId) {
+            currentIx = i
+        }
+        if(ix !== null && currentIx !== null) {
+            break;
+        }
+    }
+    tempHostList = exchanges(ix, currentIx, [].concat(hostList))
+    return db.set(TABLE_HOST_NAME, tempHostList).value()[TABLE_HOST_NAME]
 }
 
 module.exports =  {

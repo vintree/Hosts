@@ -18,9 +18,7 @@ class Index extends Component {
 }
 
 function select(state) {
-    console.log(state)
-    return {
-    }
+    return {}
 }
 
 export default connect(select)(Index)

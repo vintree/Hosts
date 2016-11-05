@@ -5,14 +5,12 @@ import {
 
 export default {
     showLoading: (id) => {
-        console.log('show');
         return {
             type: SHOW_LOADING,
             isShow: true
         }
     },
     hideLoading: () => {
-        console.log('hide');
         return {
             type: HIDE_LOADING,
             isShow: false
