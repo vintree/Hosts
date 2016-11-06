@@ -41,7 +41,7 @@
 .host-plugin {
     position: fixed;
     top: 0;
-    bottom: 0;
+    bottom: 45px;
     right: 0;
     z-index: 999;
     width: 45px;
@@ -70,6 +70,16 @@
         background: linear-gradient(to right, #ff7600, #00d0ff, #ff0040);
         animation: rotate 10s infinite;
     }
+}
+
+.host-updater {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 45px;
+    @include line-height(45px);
+    text-align: center;
+    background-color: #414755;
 }
 
 @keyframes rotate {

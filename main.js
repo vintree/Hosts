@@ -7,7 +7,8 @@ const {
     shell, 
     globalShortcut, 
     Tray,
-    ipcMain
+    ipcMain,
+    autoUpdater
 } = electron
 const path = require('path')
 const packages = require('./package')
@@ -34,6 +35,64 @@ function createWindow() {
     globalShortcut.register('cmd+w', function() {
         app.hide()
     })
+
+    // 自动更新
+    // autoUpdater.setFeedURL('https://github.com/wuguzi/Hosts/releases/download/1.2.0/Hosts-1.2.0.dmg')
+    autoUpdater.setFeedURL(0)
+    autoUpdater.checkForUpdates()
+
+    autoUpdater.on('checking-for-update', () => {
+        console.log('1');
+    })
+    autoUpdater.on('update-available', () => {
+        console.log('2');
+    })
+    autoUpdater.on('update-not-available', () => {
+        console.log('3');
+    })
+    autoUpdater.on('update-downloaded', (data) => {
+        console.log('4', data);
+        autoUpdater.quitAndInstall()
+    })
+    autoUpdater.on('error', () => {
+        console.log('5');
+    })
+    // 
+
+
+    // 下载
+    win.webContents.session.on('will-download', (event, item, webContents) => {
+    // Set the save path, making Electron not to prompt a save dialog.
+        item.setSavePath('https://github.com/wuguzi/Hosts/releases/download/1.2.0/Hosts-1.2.0.dmg')
+        const totalBytes = item.getTotalBytes();
+        const filePath = path.join(app.getPath('downloads'), item.getFilename());
+        item.setSavePath(filePath);
+
+        item.on('updated', (event, state) => {
+            console.log('aaaaaa');
+            win.setProgressBar(item.getReceivedBytes() / totalBytes);
+        })
+    
+        item.on('done', (e, state) => {
+            //如果窗口还在的话，去掉进度条
+            if (win && !win.isDestroyed()) {
+                win.setProgressBar(-1);
+            }
+                
+                //下载被取消或中断了
+            if (state === 'interrupted') {
+                electron.dialog.showErrorBox('下载失败', `文件 ${item.getFilename()} 因为某些原因被中断下载`);
+            }
+                
+                //下载完成，让 dock 上的下载目录Q弹一下下
+            if (state === 'completed') {
+                app.dock.downloadFinished(filePath);
+            }
+        });
+    })
+    
+
+
     // 当窗口关闭时调用的方法
     win.on('close', (event) => {})
 
@@ -46,7 +105,6 @@ function createWindow() {
     // shell.openExternal('https://taobao.com')
     // shell.openItem(`${__dirname}/index.html`)
     // shell.beep()
-    // console.log(dialog.showOpenDialog({ properties: [ 'openFile', 'openDirectory', 'multiSelections' ]}));
 }
 
 app.on('ready', createWindow)

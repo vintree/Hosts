@@ -28,8 +28,6 @@ function downloadConfigs(outPath, name) {
     let configMain = fs.readFileSync(`${outPath}/${name}`, 'utf-8') 
     configMain = JSON.parse(configMain)
     const { configs } = configMain
-    console.log('configs', configs);
-
     Object.keys(configs).forEach((key) => {
         const config = configs[key]
         fileDownload(config.url, {
@@ -38,7 +36,7 @@ function downloadConfigs(outPath, name) {
         }, (err) => {
             if (err) throw err
         })
-    })    
+    })
 }
 
 module.exports = function downloades(type, opt, url) {
