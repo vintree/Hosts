@@ -35,19 +35,13 @@ function initPlugin() {
     Plugin.allPlugin()
 }
 
-function initConfig() {
-    let tempOpts = [{
+function initConfigsMain() {
+    const tempOpt = {
         name: 'plugins.json',
         outPath: `${userData}/Configs`,
-        url: "https://raw.githubusercontent.com/wuguzi/Hosts/master/Configs/plugin.json"
-    },{
-        name: 'updates.json',
-        outPath: `${userData}/Configs`,
-        url: "https://raw.githubusercontent.com/wuguzi/Hosts/master/Configs/plugin.json"
-    }]
-    tempOpts.forEach((tempOpt, i) => {
-        download('config', tempOpt, tempOpt.url)
-    })
+        url: "https://raw.githubusercontent.com/wuguzi/Hosts/master/Configs/main.json"
+    }
+    download('configMain', tempOpt, tempOpt.url)
 }
 
 module.exports = {
@@ -55,7 +49,7 @@ module.exports = {
         createDir()
         createTable()
         initPlugin()
-        initConfig()
+        initConfigsMain()
     },
     defaultDirPath
 }
