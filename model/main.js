@@ -37,7 +37,7 @@ function initPlugin() {
 
 function initConfigsMain() {
     const tempOpt = {
-        name: 'plugins.json',
+        name: 'main.json',
         outPath: `${userData}/Configs`,
         url: "https://raw.githubusercontent.com/wuguzi/Hosts/master/Configs/main.json"
     }

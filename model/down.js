@@ -24,13 +24,27 @@ function initLoading() {
     }, 120000)
 }
 
-function downloadConfigs(opts) {
-    fileDownload(opts.url, {
-        directory: `${userData}/${opts.relativePath}`,
-        filename: opts.name
-    }, (err) => {
-        if (err) throw err
+function downloadConfigs(outPath, name) {
+    let configMain = fs.readFileSync(`${outPath}/${name}`, 'utf-8') 
+    configMain = JSON.parse(configMain)
+    const urls = configMain.urls
+
+
+
+    Object.keys(urls).forEach((key, i) => {
+        fileDownload(opts.url, {
+            directory: `${userData}/${opts.relativePath}`,
+            filename: opts.name
+        }, (err) => {
+            if (err) throw err
+        })
+
+
+        downloadConfigs(urls[key])
     })
+
+
+    
 }
 
 module.exports = function downloades(type, opt, url) {
@@ -112,17 +126,16 @@ module.exports = function downloades(type, opt, url) {
             }
             break
         case 'configMain':
+            console.log(fs.readFileSync('/Users/px/Library/Application Support/Hosts/Configs/main.json', 'utf-8'));
+            console.log(fs.readFileSync('/Users/px/Library/Application\ Support/Hosts/Configs/main.json', 'utf-8'));
             fileDownload(url, {
                 directory: outPath,
                 filename: name
             }, (err) => {
                 if (err) throw err
-                let configMain = fs.readFileSync(`${outPath}/${name}`, 'utf-8')
-                configMain = JSON.parse(configMain)
-                const urls = configMain.urls
-                Object.keys(urls).forEach((key, i) => {
-                    downloadConfigs(urls[key])
-                })
+                setTimeout(() => {
+                    downloadConfigs(outPath, name)
+                }, 0)
             })
         default:
             break
