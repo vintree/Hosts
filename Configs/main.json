@@ -4,12 +4,12 @@
         "plugin": {
             "name": "plugins.json",
             "relativePath": "Configs",
-            "url": "https://raw.githubusercontent.com/wuguzi/Hosts/master/Configs/main.json"
+            "url": "https://raw.githubusercontent.com/wuguzi/Hosts/master/Configs/plugins.json"
         },
         "updates": {
             "name": "updates.json",
             "relativePath": "Configs",
-            "url": "https://raw.githubusercontent.com/wuguzi/Hosts/master/updates/main.json"
+            "url": "https://raw.githubusercontent.com/wuguzi/Hosts/master/Configs/updates.json"
         }
     }
 }

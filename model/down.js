@@ -27,24 +27,18 @@ function initLoading() {
 function downloadConfigs(outPath, name) {
     let configMain = fs.readFileSync(`${outPath}/${name}`, 'utf-8') 
     configMain = JSON.parse(configMain)
-    const urls = configMain.urls
+    const { configs } = configMain
+    console.log('configs', configs);
 
-
-
-    Object.keys(urls).forEach((key, i) => {
-        fileDownload(opts.url, {
-            directory: `${userData}/${opts.relativePath}`,
-            filename: opts.name
+    Object.keys(configs).forEach((key) => {
+        const config = configs[key]
+        fileDownload(config.url, {
+            directory: `${userData}/${config.relativePath}`,
+            filename: config.name
         }, (err) => {
             if (err) throw err
         })
-
-
-        downloadConfigs(urls[key])
-    })
-
-
-    
+    })    
 }
 
 module.exports = function downloades(type, opt, url) {
@@ -126,8 +120,6 @@ module.exports = function downloades(type, opt, url) {
             }
             break
         case 'configMain':
-            console.log(fs.readFileSync('/Users/px/Library/Application Support/Hosts/Configs/main.json', 'utf-8'));
-            console.log(fs.readFileSync('/Users/px/Library/Application\ Support/Hosts/Configs/main.json', 'utf-8'));
             fileDownload(url, {
                 directory: outPath,
                 filename: name
