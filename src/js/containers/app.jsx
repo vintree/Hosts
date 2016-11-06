@@ -12,7 +12,9 @@ import Updater from '../components/updater/index'
 class App extends Component {
     constructor(props) {
         super(props)
-        isLatest()
+        this.state = {
+            latest: isLatest() 
+        }
     }
     render() {
         const { loading } = this.props
@@ -49,11 +51,12 @@ function isLatest() {
     if(fs.existsSync(updaterPath)) {
         latestPackages = fs.readFileSync(`${userData}/Configs/updates.json`, 'utf-8')
         latestPackages = JSON.parse(latestPackages)
+        latestVersion = latestPackages.releas.releasVersion
+        if(currentVersion !== latestVersion) {
+            return latestPackages
+        }
     }
-    console.log('latestPackages', latestPackages);
-    latestVersion = latestPackages.releas.releasVersion
-    console.log('currentVersion', currentVersion);
-    console.log('latestVersion', latestVersion);
+    return undefined
 }
 
 function select(state) {
