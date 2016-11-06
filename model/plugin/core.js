@@ -12,8 +12,6 @@ const { defaultDirPath } = require('../main')
 const mkdir = require('../mkdir')
 const { rm } = require('shelljs')
 
-
-
 function traversePlugin(type, pluginsPath) {
     let pluginList = fs.readdirSync(pluginsPath)
     pluginList.map((plugin, i) => {
@@ -25,25 +23,25 @@ function traversePlugin(type, pluginsPath) {
             const pluginIcon = `${pluginPath}/icons/app.png`
             if(fs.existsSync(pluginPackages)) {
                 let packages = fs.readFileSync(`${pluginPath}/package.json`, 'utf-8')
-                    packages = JSON.parse(packages)
-                    packages.icons = `${pluginPath}/${packages.icons}`
-                    packages.pluginPath = pluginPath
-                    packages.outPath = `${pluginPath}/dist/index.js`
-                    let config = {
-                        name: packages.name,
-                        version: packages.version, 
-                        icons: packages.icons,
-                        pluginPath: packages.pluginPath,
-                        outPath: packages.outPath,
-                        packagePath: pluginPackages
-                    }
-                    if(type === 'dev') {
-                        config['dev'] = true,
-                        config['switch'] = packages.switch
-                        DBPlugin.addDev(packages.name, config)
-                        return
-                    }
-                    DBPlugin.addReleas(packages.name, config)
+                packages = JSON.parse(packages)
+                packages.icons = `${pluginPath}/${packages.icons}`
+                packages.pluginPath = pluginPath
+                packages.outPath = `${pluginPath}/dist/index.js`
+                let config = {
+                    name: packages.name,
+                    version: packages.version, 
+                    icons: packages.icons,
+                    pluginPath: packages.pluginPath,
+                    outPath: packages.outPath,
+                    packagePath: pluginPackages
+                }
+                if(type === 'dev') {
+                    config['dev'] = true,
+                    config['switch'] = packages.switch
+                    DBPlugin.addDev(packages.name, config)
+                    return
+                }
+                DBPlugin.addReleas(packages.name, config)
             } else {
                 console.warn(`${pluginPath}/package.json文件不存在`);
                 rm('-rf', `${pluginPath}`)
