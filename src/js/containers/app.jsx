@@ -17,7 +17,11 @@ class App extends Component {
         }
     }
     render() {
+        const { latest } = this.state
         const { loading } = this.props
+        console.log('latest', latest);
+        // releaseDate = 
+
         return (
             <div>
                 <div className="host-nav">
@@ -26,11 +30,11 @@ class App extends Component {
                 <div className="host-content">
                     <Content></Content>
                 </div>
-                <div className="host-plugin">
+                <div className={latest ? 'host-plugin updater' : 'host-plugin'}>
                     <Plugin></Plugin>
                 </div>
                 <div className="host-updater">
-                    <Updater></Updater>
+                    <Updater latest={latest}></Updater>
                 </div>
                 <div className={
                     loading ? 'host-loading active' : 'host-loading'

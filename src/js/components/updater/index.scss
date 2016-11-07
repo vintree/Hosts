@@ -1,5 +1,18 @@
 @import '../../../sass/variable.scss';
 @import '../../../sass/mixin.scss';
 ._updater {
-    cursor: pointer;
+    /*cursor: pointer;*/
+    ._updater-down {
+        font-weight: bold;
+        color: #999;
+    }
+    .info {
+        color: seagreen;
+    }
+    .warning {
+        color: #bf9821;
+    }
+    .over {
+        color: #c7524a;
+    }
 }

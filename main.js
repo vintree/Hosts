@@ -38,25 +38,25 @@ function createWindow() {
 
     // 自动更新
     // autoUpdater.setFeedURL('https://github.com/wuguzi/Hosts/releases/download/1.2.0/Hosts-1.2.0.dmg')
-    autoUpdater.setFeedURL(0)
-    autoUpdater.checkForUpdates()
+    // autoUpdater.setFeedURL(0)
+    // autoUpdater.checkForUpdates()
 
-    autoUpdater.on('checking-for-update', () => {
-        console.log('1');
-    })
-    autoUpdater.on('update-available', () => {
-        console.log('2');
-    })
-    autoUpdater.on('update-not-available', () => {
-        console.log('3');
-    })
-    autoUpdater.on('update-downloaded', (data) => {
-        console.log('4', data);
-        autoUpdater.quitAndInstall()
-    })
-    autoUpdater.on('error', () => {
-        console.log('5');
-    })
+    // autoUpdater.on('checking-for-update', () => {
+    //     console.log('1');
+    // })
+    // autoUpdater.on('update-available', () => {
+    //     console.log('2');
+    // })
+    // autoUpdater.on('update-not-available', () => {
+    //     console.log('3');
+    // })
+    // autoUpdater.on('update-downloaded', (data) => {
+    //     console.log('4', data);
+    //     autoUpdater.quitAndInstall()
+    // })
+    // autoUpdater.on('error', () => {
+    //     console.log('5');
+    // })
     // 
 
 
