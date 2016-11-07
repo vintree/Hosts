@@ -33,19 +33,19 @@
                 }
             }
         }
-        .CodeMirror-gutters {
-            // z-index: 1;
-        }
     }
 }
 .host-plugin {
     position: fixed;
     top: 0;
-    bottom: 45px;
+    bottom: 0;
     right: 0;
     z-index: 999;
     width: 45px;
     background-color: $color-b1-1;
+    &.updater {
+        bottom: 45px;
+    }
 }
 .host-loading {
     position: fixed;
