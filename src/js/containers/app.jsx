@@ -2,14 +2,19 @@ import './index.scss';
 const { Component } = React
 import { connect } from 'react-redux'
 import IT from 'immutable'
-
+const fs = require('fs')
+const electron = require('electron')
+const userData = electron.remote.app.getPath('userData')
 import Nav from '../components/nav/index'
 import Content from '../components/content/index'
 import Plugin from '../components/plugin/index'
-import Loading from '../components/plugin/index'
+import Updater from '../components/updater/index'
 class App extends Component {
     constructor(props) {
         super(props)
+        this.state = {
+            latest: isLatest() 
+        }
     }
     render() {
         const { loading } = this.props
@@ -24,6 +29,9 @@ class App extends Component {
                 <div className="host-plugin">
                     <Plugin></Plugin>
                 </div>
+                <div className="host-updater">
+                    <Updater></Updater>
+                </div>
                 <div className={
                     loading ? 'host-loading active' : 'host-loading'
                 }>
@@ -32,6 +40,23 @@ class App extends Component {
             </div>
         )
     }
+}
+
+function isLatest() {
+    const currenPackages = require('../../../package.json')
+    const currentVersion = currenPackages.version
+    const updaterPath = `${userData}/Configs/updates.json`
+    let latestPackages
+    let latestVersion
+    if(fs.existsSync(updaterPath)) {
+        latestPackages = fs.readFileSync(`${userData}/Configs/updates.json`, 'utf-8')
+        latestPackages = JSON.parse(latestPackages)
+        latestVersion = latestPackages.releas.releasVersion
+        if(currentVersion !== latestVersion) {
+            return latestPackages
+        }
+    }
+    return undefined
 }
 
 function select(state) {

@@ -24,9 +24,9 @@
 }
 
 @mixin overflow-ellipsis() {
-    white-space:nowrap; 
-    overflow:hidden; 
-    text-overflow:ellipsis;
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 @mixin border($orien: bottom, $width: 1px, $color : $color-grey-border) {
