@@ -37,9 +37,16 @@ function createWindow() {
     })
 
     // 自动更新
+
+    autoUpdater.on("error", function(err, msg) {
+        console.log(msg); //print msg , you can find the cash reason.
+    });
+    const feedUrl = 'http://ea-todo.herokuapp.com/updates/latest'
+    // autoUpdater.setFeedURL();
+    autoUpdater.setFeedURL(feedUrl);
+
     // autoUpdater.setFeedURL('https://github.com/wuguzi/Hosts/releases/download/1.2.0/Hosts-1.2.0.dmg')
-    // autoUpdater.setFeedURL(0)
-    // autoUpdater.checkForUpdates()
+    // autoUpdater.checkForUpdates('http://localhost:3000/')
 
     // autoUpdater.on('checking-for-update', () => {
     //     console.log('1');
@@ -57,19 +64,17 @@ function createWindow() {
     // autoUpdater.on('error', () => {
     //     console.log('5');
     // })
-    // 
+    
 
 
     // 下载
     win.webContents.session.on('will-download', (event, item, webContents) => {
     // Set the save path, making Electron not to prompt a save dialog.
-        item.setSavePath('https://github.com/wuguzi/Hosts/releases/download/1.2.0/Hosts-1.2.0.dmg')
         const totalBytes = item.getTotalBytes();
         const filePath = path.join(app.getPath('downloads'), item.getFilename());
         item.setSavePath(filePath);
 
         item.on('updated', (event, state) => {
-            console.log('aaaaaa');
             win.setProgressBar(item.getReceivedBytes() / totalBytes);
         })
     
@@ -79,16 +84,16 @@ function createWindow() {
                 win.setProgressBar(-1);
             }
                 
-                //下载被取消或中断了
+            //下载被取消或中断了
             if (state === 'interrupted') {
                 electron.dialog.showErrorBox('下载失败', `文件 ${item.getFilename()} 因为某些原因被中断下载`);
             }
                 
-                //下载完成，让 dock 上的下载目录Q弹一下下
+            //下载完成，让 dock 上的下载目录Q弹一下下
             if (state === 'completed') {
                 app.dock.downloadFinished(filePath);
             }
-        });
+        })
     })
     
 

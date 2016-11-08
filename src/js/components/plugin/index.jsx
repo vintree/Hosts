@@ -130,9 +130,11 @@ class Index extends Component {
                     )
                 }
             } else {
-                delReleasPlugin(id)
-                rm('-rf', pluginPath)
-                return ''
+                if(type === 'releas') { 
+                    delReleasPlugin(id)
+                    rm('-rf', pluginPath)
+                    return ''
+                }                
             }
         })
     }
