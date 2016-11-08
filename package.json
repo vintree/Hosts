@@ -19,6 +19,8 @@
   ],
   "license": "MIT",
   "build": {
+    "compression": "store",
+    "afterPack": "123",
     "dmg": {
       "contents": [
         {

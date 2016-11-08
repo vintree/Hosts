@@ -37,9 +37,16 @@ function createWindow() {
     })
 
     // 自动更新
+
+    autoUpdater.on("error", function(err, msg) {
+        console.log(msg); //print msg , you can find the cash reason.
+    });
+    const feedUrl = 'http://ea-todo.herokuapp.com/updates/latest'
+    // autoUpdater.setFeedURL();
+    autoUpdater.setFeedURL(feedUrl);
+
     // autoUpdater.setFeedURL('https://github.com/wuguzi/Hosts/releases/download/1.2.0/Hosts-1.2.0.dmg')
-    // autoUpdater.setFeedURL(0)
-    // autoUpdater.checkForUpdates()
+    // autoUpdater.checkForUpdates('http://localhost:3000/')
 
     // autoUpdater.on('checking-for-update', () => {
     //     console.log('1');
@@ -57,7 +64,7 @@ function createWindow() {
     // autoUpdater.on('error', () => {
     //     console.log('5');
     // })
-    // 
+    
 
 
     // 下载

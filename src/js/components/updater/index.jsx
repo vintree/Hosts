@@ -14,7 +14,7 @@ class Index extends Component {
             updateURL = latest.releas.updateURL
             releaseDate = latest.releas.releaseDate
             let downClass = '_updater-down'
-            const releaseTime = (new Date('2016-11-1')).getTime()
+            const releaseTime = (new Date(releaseDate)).getTime()
             const nowTime = (new Date()).getTime()
             const dvalue = nowTime - releaseTime
             const baseDay = 3600 * 1000 * 24
