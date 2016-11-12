@@ -43,7 +43,7 @@ module.exports = function downloades(type, opt, url) {
     } = require('./plugin/core')
     const {
         checkAllPlugin,
-        hideLoading 
+        hideLoading
     } = require('../src/js/actions/root')
     _dispatch = window[packages.name] ? window[packages.name]['store']['dispatch'] : ''
     switch(type) {
@@ -51,7 +51,7 @@ module.exports = function downloades(type, opt, url) {
             isLoading = true
             initLoading()
             if(mkdir(outPath)) {
-                githubDownload(url, outPath)
+                githubDownload(url, outPath, userData)
                 .on('dir', (dir) => {
                     console.log(dir)
                 })
