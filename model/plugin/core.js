@@ -44,7 +44,10 @@ function traversePlugin(type, pluginsPath) {
                 DBPlugin.addReleas(packages.name, config)
             } else {
                 console.warn(`${pluginPath}/package.json文件不存在`);
-                rm('-rf', `${pluginPath}`)
+                fs.rmdir(`${pluginPath}`, () => {
+                    console.log('删除成功')
+                })
+                // rm('-rf', `${pluginPath}`)
             }
 
             // fs.existsSync(`${pluginPath}/package.json`, (exists) => {
