@@ -84,12 +84,23 @@ function setTray(event, arg, win) {
         isRefresh = null
         tray.popUpContextMenu(contextMenu)
     }
-}
 
+}
 
 module.exports =  function handleTray(win) {
     defaultWin = win
+    let t = undefined
     ipcMain.on('hostList', function(event, arg) {
         setTray(event, arg, defaultWin)
+        // if(t) {
+        //     clearInterval(t)
+        //     t = setInterval(() => {
+        //         setTray(event, arg, defaultWin)
+        //     }, 1500)
+        // } else {
+        //     t = setInterval(() => {
+        //         setTray(event, arg, defaultWin)
+        //     }, 1500)
+        // }
     })
 }

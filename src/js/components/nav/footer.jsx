@@ -8,9 +8,13 @@ export default class Index extends Component {
             ipAdress: ipAdress(),
             isRefreshActive: false
         }
+        setInterval(() => {
+            this.setState({
+                ipAdress: ipAdress()
+            })
+        }, 1000)
     }
     refreshIpAdress() {
-        console.log(ipAdress());
         this.setState({
             isRefreshActive: true,
             ipAdress: ipAdress()
