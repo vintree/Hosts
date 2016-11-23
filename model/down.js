@@ -2,7 +2,8 @@ const electron = require('electron')
 const userData = electron.remote.app.getPath('userData')
 const fs = require('fs')
 const githubDownload = require('github-download')
-// const download = require('download')
+const ipAdress = require('./ip-adress')
+
 const fileDownload = require('download-file')
 const command = require('./command/core')
 const mkdir = require('./mkdir')
@@ -43,7 +44,7 @@ module.exports = function downloades(type, opt, url) {
     } = require('./plugin/core')
     const {
         checkAllPlugin,
-        hideLoading 
+        hideLoading
     } = require('../src/js/actions/root')
     _dispatch = window[packages.name] ? window[packages.name]['store']['dispatch'] : ''
     switch(type) {
@@ -51,7 +52,7 @@ module.exports = function downloades(type, opt, url) {
             isLoading = true
             initLoading()
             if(mkdir(outPath)) {
-                githubDownload(url, outPath)
+                githubDownload(url, outPath, userData)
                 .on('dir', (dir) => {
                     console.log(dir)
                 })
@@ -81,15 +82,18 @@ module.exports = function downloades(type, opt, url) {
             }
             break
         case 'configMain':
-            fileDownload(url, {
-                directory: outPath,
-                filename: name
-            }, (err) => {
-                if (err) throw err
-                setTimeout(() => {
-                    downloadConfigs(outPath, name)
-                }, 0)
-            })
+            if(ipAdress()) {
+                fileDownload(url, {
+                    directory: outPath,
+                    filename: name
+                }, (err) => {
+                    if (err) throw err
+                    setTimeout(() => {
+                        downloadConfigs(outPath, name)
+                    }, 0)
+                })
+            }
+            break
         default:
             break
     }

@@ -4,11 +4,12 @@ import { connect } from 'react-redux'
 import IT from 'immutable'
 const fs = require('fs')
 const electron = require('electron')
-const userData = electron.remote.app.getPath('userData')
+let userData = electron.remote.app.getPath('userData')
 import Nav from '../components/nav/index'
 import Content from '../components/content/index'
 import Plugin from '../components/plugin/index'
 import Updater from '../components/updater/index'
+
 class App extends Component {
     constructor(props) {
         super(props)
@@ -50,12 +51,10 @@ function isLatest() {
     let latestPackages
     let latestVersion
     if(fs.existsSync(updaterPath)) {
-        latestPackages = fs.readFileSync(`${userData}/Configs/updates.json`, 'utf-8')
+        latestPackages = fs.readFileSync(`${updaterPath}`, 'utf-8')
         latestPackages = JSON.parse(latestPackages)
         latestVersion = latestPackages.releas.releasVersion
-        if(currentVersion !== latestVersion) {
-            return latestPackages
-        }
+        return latestPackages
     }
     return undefined
 }
