@@ -1,13 +1,7 @@
 # Hosts
 
-Hosts是一个基于host的综合管理工具
+![](https://github.com/wuguzi/Hosts/blob/master/build/Mac/icon_128x128@2x.png?raw=true)
+
+Hosts是一个基于host的综合管理工具，其中集成了插件管理功能，可用React + nodeJs编写你喜欢的插件！
 
 目前支持Mac
-
-## 更新日志
-### 1.2
-* 「系统Hosts」由不可选中复制换成可以选中复制并可获得焦点
-* 优化编辑Host时的响应速度
-* Host列表位置替换从交叉替换换成下移推跌替换
-* 新增插件管理功能
-* 新增检测更新
