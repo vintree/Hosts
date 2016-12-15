@@ -2,3 +2,5 @@ node_modules/
 *.log
 dist/
 app/
+npm-debug.log.*
+.vscode
