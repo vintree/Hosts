@@ -2,13 +2,17 @@ git:
   depth: 10
 notifications:
   email: false
-
 language: node_js
 node_js:
-  - "7"
-
-script: './script/cibuild'
-
+- '7'
+script: ./script/cibuild
 branches:
   only:
-    - master
+  - master
+env:
+  global:
+    secure: a+Ur/Mlv9EHmIVEywyUEHT9Zi9sDL45oV3PS+h/gLyUonadG8J2GnZBpdJY/1bvUWBZK6D1eNMT2Z/hLpot6zvKN/bE2AHwLHQHX9YPK4J1mN80GC7r5vS2gr4VFajSmaBee9UVOkEIvfEqOrZeEzcfOJRnw/rZ3qtCfcX3GJ8cnvx117MrVEi0JiyWCEJVZQM+lqVrSqQCQUNEY2O3N3CRxdz4JXz/Cx+CraHe0MrR7vH1uK/lyeiRdXX43/lp6eY4TaCnYYc3xhLGZ50P6yb5Tgs9lokpAsCUMREHkt+0QQru/QDvNdYWqOoutiyzx5tTK3sd0PBMda8SCMWpqniKfm0QsWdJTXD0NzhkYRIptThr3v++M1ew4myRfmJdpENvQRlX5cfGDU0WF8bJQxsUNra+7S/z6amF2cLjjkXonaT+sddmVsMn6C0gbgPvatuKdrBhlEpBJ9J1aWxXs5cqx7x7bV1z3atWYvFPjUJl3k831FYHCiJyuDxd5AGNuvEbrQjWFNvlZ1im8GBsqX7R9fq6NsbWUHZxFOg4Lk99RUdni/P+AHLhe+lxtDVQGVJbQd3PdB1S/PHb8DuqESILi6DVd9DBwMd+//Ut+STip36cW9D0PPWXY17RUfHn8j0/B3cNtylnBI36FzbcLHR6ccnZJ9NxAaxmmrCy6n7g=
+install:
+  - npm install
+after_success:
+  - npm run dist
