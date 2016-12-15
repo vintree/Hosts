@@ -1,16 +1,16 @@
 {
   "name": "Hosts",
-  "version": "1.2.0",
-  "electronVersion": "1.4.1",
+  "version": "1.2.1",
+  "electronVersion": "1.4.12",
   "description": "Hosts是一个非常简单的host管理工具，轻便的交互体验，快捷的管理方式，开发起来得心应手！",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "st": "electron .",
     "dev": "webpack -w",
-    "releas": "webpack --config webpack.releas.js -w",
+    "r": "webpack --config webpack.releas.js -w",
     "package": "build --dir",
-    "dist": "build"
+    "dist": "build --mac"
   },
   "author": "puxiao",
   "keywords": [
@@ -55,7 +55,7 @@
     "devtron": "^1.3.0",
     "download": "^5.0.2",
     "download-file": "^0.1.5",
-    "electron": "^1.4.7",
+    "electron": "^1.4.12",
     "file-loader": "^0.9.0",
     "github-download": "^0.5.0",
     "heroku": "^0.2.0",
@@ -78,6 +78,7 @@
     "steno": "^0.4.4",
     "style-loader": "^0.13.1",
     "underscore-db": "^0.12.0",
+    "upx.js": "^1.1.0",
     "url-loader": "^0.5.7",
     "uuid": "^2.0.3",
     "webpack": "^1.13.2"

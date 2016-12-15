@@ -30,6 +30,7 @@ class Item extends Component {
         super(props)
         this.state = {
             inputType: 'text',
+            draggable: true,
             isDrag: false
         }
     }
@@ -41,7 +42,8 @@ class Item extends Component {
     }
     handleChangeDom() {
         this.setState({
-            inputType: 'input'
+            inputType: 'input',
+            draggable: false
         })
     }
     handleBlur(id) {
@@ -49,11 +51,13 @@ class Item extends Component {
         if(name === '') {
             this.setState({
                 inputType: 'text',
+                draggable: true
             })
         } else {
             this.updateName(id, name)
             this.setState({
-                inputType: 'text'
+                inputType: 'text',
+                draggable: true
             })
         }
     }
@@ -63,11 +67,13 @@ class Item extends Component {
             if(name === '') {
                 this.setState({
                     inputType: 'text',
+                    draggable: true                    
                 })
             } else {
                 this.updateName(id, name)
                 this.setState({
-                    inputType: 'text'
+                    inputType: 'text',
+                    draggable: true                    
                 })
             }
         }
@@ -99,6 +105,7 @@ class Item extends Component {
         }
     }
     handleDragOver(e) {
+        e.stopPropagation()
         const { id } = this.props.host
         dragOverId = id
         this.setState({
@@ -106,11 +113,13 @@ class Item extends Component {
         })
     }
     handleDragLeave(e) {
+        e.stopPropagation()
         this.setState({
             isDrag: false
         })
     }
     handleDrop(e) {
+        e.stopPropagation()
         const { dispatch } = this.props
         const { id } = this.props.host
         dispatch(exchangeHost(id, dragOverId))
@@ -123,6 +132,8 @@ class Item extends Component {
         const { id, name, switched } = this.props.host
         let { dispatch, activeHost } = this.props
         const { inputType, isDrag } = this.state
+        let { draggable } = this.state
+        
         if(id === undefined) return
         activeHost = activeHost.toObject()
         let className = 'item'
@@ -135,8 +146,21 @@ class Item extends Component {
         if(isDrag) {
             className += ' drag'
         }
+        let liProps = {
+            onClick: this.checkActiveHost.bind(this, id)
+        }
+        if(draggable) {
+            liProps = {
+                onClick: this.checkActiveHost.bind(this, id),
+                draggable: draggable,
+                onDragOver: this.handleDragOver.bind(this),
+                onDragLeave: this.handleDragLeave.bind(this),
+                onDragEnd: this.handleDrop.bind(this)
+            }
+        }
+
         return (
-            <li className={className} onClick={this.checkActiveHost.bind(this, id)} draggable="true" data-text={name} onDragOver={this.handleDragOver.bind(this)} onDragLeave={this.handleDragLeave.bind(this)} onDragEnd={this.handleDrop.bind(this)}>
+            <li className={className} {...liProps}>
                 <i className="iconfont icon-chachada icon-close-self float-left" ref="close" onClick={this.delHost.bind(this, id)}></i>
                 {
                     inputType === 'text' ? <div className="hosts-name" onDoubleClick={this.handleChangeDom.bind(this)}>{name}</div> : <input className="update-name" type="text" defaultValue={name} onKeyUp={this.handleKeyUp.bind(this, id)} onBlur={this.handleBlur.bind(this, id)} ref="updateName" /> 
