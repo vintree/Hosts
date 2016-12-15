@@ -5,7 +5,7 @@
   "description": "Hosts是一个非常简单的host管理工具，轻便的交互体验，快捷的管理方式，开发起来得心应手！",
   "main": "main.js",
   "scripts": {
-    "test": "vows --spec",
+    "test": "webpack -w",
     "st": "electron .",
     "dev": "webpack -w",
     "r": "webpack --config webpack.releas.js -w",
