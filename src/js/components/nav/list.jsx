@@ -122,11 +122,13 @@ class Item extends Component {
         e.stopPropagation()
         const { dispatch } = this.props
         const { id } = this.props.host
-        dispatch(exchangeHost(id, dragOverId))
-        if(_type === 'all') {
-            dispatch(checkActiveHostAll())
+        if(id !== dragOverId) {
+            dispatch(exchangeHost(id, dragOverId))
+            if(_type === 'all') {
+                dispatch(checkActiveHostAll())
+            }
+            updateHostFile()
         }
-        updateHostFile()
     }
     render() {
         const { id, name, switched } = this.props.host
