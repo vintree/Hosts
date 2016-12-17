@@ -1,6 +1,6 @@
-var electron = require('electron')
-var ipcRenderer = electron.ipcRenderer
 const { Component } = React
+const electron = require('electron')
+const ipcRenderer = electron.ipcRenderer
 import { connect } from 'react-redux'
 import IT from 'immutable'
 import { 

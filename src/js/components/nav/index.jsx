@@ -2,10 +2,10 @@ import './index.scss'
 const { Component } = React
 import { connect } from 'react-redux'
 import { checkActiveHostAll } from '../../actions/root'
-
 import List from './list'
 import Header from './header'
 import Footer from './footer'
+
 class Index extends Component {
     constructor(props) {
         super(props)

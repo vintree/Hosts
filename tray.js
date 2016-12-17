@@ -2,7 +2,13 @@ const electron = require('electron')
 const packages = require('./package')
 const path = require('path');
 const ipAdress = require('./model/ip-adress')
-const { app, Tray, Menu, ipcMain, clipboard } = electron
+const { 
+    app, 
+    Tray, 
+    Menu, 
+    ipcMain, 
+    clipboard 
+} = electron
 const iconPath = path.join(__dirname, 'icon_16x16@2x.png')
 const tray = new Tray(iconPath);
 let template = []
@@ -92,15 +98,5 @@ module.exports =  function handleTray(win) {
     let t = undefined
     ipcMain.on('hostList', function(event, arg) {
         setTray(event, arg, defaultWin)
-        // if(t) {
-        //     clearInterval(t)
-        //     t = setInterval(() => {
-        //         setTray(event, arg, defaultWin)
-        //     }, 1500)
-        // } else {
-        //     t = setInterval(() => {
-        //         setTray(event, arg, defaultWin)
-        //     }, 1500)
-        // }
     })
 }

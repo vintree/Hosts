@@ -1,7 +1,9 @@
 const { Component } = React
 const electron = require('electron')
+const ipcRenderer = electron.ipcRenderer
 import { connect } from 'react-redux'
 import { addHost } from '../../actions/root'
+
 
 class Header extends Component {
     constructor(props) {
@@ -10,7 +12,21 @@ class Header extends Component {
             inputType: 'create'
         }
     }
-
+    componentDidMount() {
+        this.triggerSearch()
+    }
+    triggerSearch() {
+        const searchDom = this.refs.search
+        ipcRenderer.send('search-message', 'init')
+        ipcRenderer.on('search-reply', (event, arg) => {
+            if(arg === 'trigger') {
+                searchDom.focus()
+                this.setState({
+                    inputType: 'search'
+                })
+            }
+        })
+    }
     createNode(dispatch) {
         const searchDom = this.refs.search 
         const name = searchDom.value
@@ -60,12 +76,28 @@ class Header extends Component {
         const { inputType } = this.state
         return (
             <div className="header over-hide">
-                <input className="inp-search" type="text" placeholder={
-                    inputType === 'create' ? '新建模块' : '搜索' 
-                } ref="search" onKeyUp={this.handleKeyUp.bind(this)}  />
-                <i className={
-                    inputType === 'create' ? 'iconfont icon-jia float-right icon-self bind-active' : 'iconfont icon-jia float-right icon-self' 
-                } onClick={this.switchCreate.bind(this)}></i>
+                <input 
+                    className="inp-search" 
+                    type="text" 
+                    placeholder={
+                        inputType === 'create' ? '新建模块' : '搜索' 
+                    } 
+                    ref="search" onKeyUp={this.handleKeyUp.bind(this)}  />
+                {
+                    inputType === 'create' ?
+                    (
+                        <i
+                            className='iconfont icon-jia float-right icon-self bind-active'
+                            onClick={this.switchCreate.bind(this)}>
+                        </i>
+                    ) :
+                    (
+                        <i
+                            className='iconfont icon-jia float-right icon-self search'
+                            onClick={this.switchCreate.bind(this)}>
+                        </i>
+                    )
+                }
             </div>
         )
         // search node

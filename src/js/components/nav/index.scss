@@ -28,8 +28,12 @@
             color: #999;
             margin-right: 11.5px;
             cursor: pointer;
+            transition: all .3s;
             &.bind-active {
                 color: #efefef;
+            }
+            &.search {
+                transform: rotateZ(45deg);
             }
         }
     }

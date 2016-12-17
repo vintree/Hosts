@@ -15,9 +15,6 @@ const path = require('path')
 const packages = require('./package')
 const ipAdress = require('./model/ip-adress')
 
-
-console.log('shortcut', shortcut.cmd_w);
-
 let win = null
 let isQuit = false
 function createWindow() {
@@ -31,18 +28,26 @@ function createWindow() {
     win.loadURL(`file://${__dirname}/app/index.html`)
 
     // 打开开发工具页面
-    // win.webContents.openDevTools()
+    win.webContents.openDevTools()
 
     require('./menu')()
     require('./tray')(win)
     
+    // console.log(win);
+    // shortcut.cmd_f(win)
+    // win.webContents.send('ping', 'whoooooooh!11111')
+    // win.webContents.on('did-finish-load', function () {
+    //     console.log('1111111');
+    //     win.webContents.send('ping', 'whoooooooh!')
+    // })
+
+    // shortcut.cmd_f()
     // 自动更新
-    autoUpdater.on("error", function(err, msg) {
-        console.log(msg); //print msg , you can find the cash reason.
-    });
-    const feedUrl = 'http://ea-todo.herokuapp.com/updates/latest'
-    // autoUpdater.setFeedURL();
-    autoUpdater.setFeedURL(feedUrl);
+    // autoUpdater.on("error", function(err, msg) {
+    //     console.log(msg); //print msg , you can find the cash reason.
+    // });
+    // const feedUrl = 'http://ea-todo.herokuapp.com/updates/latest'
+    // autoUpdater.setFeedURL(feedUrl);
 
     // autoUpdater.setFeedURL('https://github.com/wuguzi/Hosts/releases/download/1.2.0/Hosts-1.2.0.dmg')
     // autoUpdater.checkForUpdates('http://localhost:3000/')
@@ -63,8 +68,6 @@ function createWindow() {
     // autoUpdater.on('error', () => {
     //     console.log('5');
     // })
-    
-
 
     // 下载
     win.webContents.session.on('will-download', (event, item, webContents) => {
@@ -94,8 +97,6 @@ function createWindow() {
             }
         })
     })
-    
-
 
     // 当窗口关闭时调用的方法
     win.on('close', (event) => {})
@@ -112,8 +113,6 @@ function createWindow() {
 }
 
 app.on('ready', createWindow)
-
-// app.dock.setIcon('http://img5.imgtn.bdimg.com/it/u=163029786,1788419189&fm=21&gp=0.jpg')
 
 app.on('before-quit', (event) => {})
 
@@ -142,6 +141,6 @@ app.on('browser-window-blur', function() {
     shortcut.unregisterAll()
 })
 app.on('browser-window-focus', function() {
-    shortcut.cmd_w()
-    shortcut.cmd_f()
+    shortcut.cmdOrCtrl_w()
+    shortcut.cmdOrCtrl_f()    
 })
