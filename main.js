@@ -10,9 +10,13 @@ const {
     ipcMain,
     autoUpdater
 } = electron
+const shortcut = require('./shortcut')
 const path = require('path')
 const packages = require('./package')
 const ipAdress = require('./model/ip-adress')
+
+
+console.log('shortcut', shortcut.cmd_w);
 
 let win = null
 let isQuit = false
@@ -31,13 +35,8 @@ function createWindow() {
 
     require('./menu')()
     require('./tray')(win)
-
-    globalShortcut.register('cmd+w', function() {
-        app.hide()
-    })
-
+    
     // 自动更新
-
     autoUpdater.on("error", function(err, msg) {
         console.log(msg); //print msg , you can find the cash reason.
     });
@@ -104,7 +103,7 @@ function createWindow() {
     win.on('closed', (event) => {
         win = null
         app.quit()
-        globalShortcut.unregisterAll()
+        shortcut.unregisterAll()
     })
 
     // shell.openExternal('https://taobao.com')
@@ -140,10 +139,9 @@ app.on('activate', () => {
 });
 
 app.on('browser-window-blur', function() {
-    globalShortcut.unregisterAll()
+    shortcut.unregisterAll()
 })
 app.on('browser-window-focus', function() {
-    globalShortcut.register('cmd+w', function() {
-        app.hide()
-    })
+    shortcut.cmd_w()
+    shortcut.cmd_f()
 })

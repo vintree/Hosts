@@ -131,11 +131,9 @@ class Item extends Component {
         }
     }
     render() {
-        const { id, name, switched } = this.props.host
         let { dispatch, activeHost } = this.props
-        const { inputType, isDrag } = this.state
-        let { draggable } = this.state
-        
+        const { id, name, switched } = this.props.host
+        const { inputType, isDrag, draggable } = this.state
         if(id === undefined) return
         activeHost = activeHost.toObject()
         let className = 'item'

@@ -1,4 +1,5 @@
 const { Component } = React
+const electron = require('electron')
 import { connect } from 'react-redux'
 import { addHost } from '../../actions/root'
 
