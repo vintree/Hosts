@@ -5,16 +5,10 @@ const {
     globalShortcut
 } = electron
 
-
-// ipcMain.on('search-message', function (event, arg) {
-//     console.log(arg)  // prints "ping"
-//     event.sender.send('search-reply', 'pong')
-//     // console.log(globalShortcut.isRegistered('CmdOrCtrl+f'));
-//     // if(globalShortcut.isRegistered('CmdOrCtrl+f')) {
-//     //     console.log('CmdOrCtrl+f');
-//     // }
-// })
-
+let searchEvent = null
+ipcMain.on('search-message', function (event, arg) {
+    searchEvent = event
+})
 
 exports.cmdOrCtrl_w = function() {
     globalShortcut.register('CmdOrCtrl+w', () => {
@@ -23,21 +17,9 @@ exports.cmdOrCtrl_w = function() {
 }
 
 exports.cmdOrCtrl_f = function() {
-    ipcMain.on('search-message', function (event, arg) {
-        if(!globalShortcut.isRegistered('CmdOrCtrl+f')) {
-            globalShortcut.register('CmdOrCtrl+f', () => {
-                event.sender.send('search-reply', 'trigger')
-            })
-        }
+    globalShortcut.register('CmdOrCtrl+f', () => {
+        searchEvent.sender.send('search-reply', 'trigger')
     })
-
-    // globalShortcut.register('cmd+f', () => {
-        // console.log('===============cmd+f', searchEvent);
-        // ipcMain.on('synchronous-message', function (event, arg) {
-        //     console.log(arg)  // prints "ping"
-        //     event.returnValue = 'pong'
-        // })
-    // })
 }
 
 exports.unregisterAll = function() {

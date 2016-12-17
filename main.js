@@ -32,7 +32,7 @@ function createWindow() {
 
     require('./menu')()
     require('./tray')(win)
-    
+    shortcut.cmdOrCtrl_f('init')
     // console.log(win);
     // shortcut.cmd_f(win)
     // win.webContents.send('ping', 'whoooooooh!11111')
@@ -142,5 +142,5 @@ app.on('browser-window-blur', function() {
 })
 app.on('browser-window-focus', function() {
     shortcut.cmdOrCtrl_w()
-    shortcut.cmdOrCtrl_f()    
+    shortcut.cmdOrCtrl_f()
 })
