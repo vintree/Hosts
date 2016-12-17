@@ -15,10 +15,15 @@ import updateHostFile from '../../../../model/update-host'
 let activeId = null
 let dragOverId = null
 let _type = null
+let _hostData = null
 
 ipcRenderer.on('hostList', (event, arg) => {
     const { dispatch } = window.store
-    dispatch(updateHost(arg.id, {switched: arg.switched}))
+    const searchValue = _hostData.get('searchValue')
+    const hostList = _hostData.get('hostList')
+    dispatch(updateHost(arg.id, {
+        switched: arg.switched
+    }, searchValue, hostList))
     updateHostFile()
     if(_type === 'all') {
         dispatch(checkActiveHostAll())
@@ -79,28 +84,32 @@ class Item extends Component {
         }
     }
     updateName(id, name) {
-        const { dispatch } = this.props
+        const { dispatch, hostData } = this.props
+        const searchValue = hostData.get('searchValue')
+        const hostList = hostData.get('hostList')
         dispatch(updateHost(id, {
             name
-        }))
+        }, searchValue, hostList))
     }
     updateSwitched(id, switched) {
-        const { dispatch } = this.props
+        const { dispatch, hostData } = this.props
+        const searchValue = hostData.get('searchValue')
+        const hostList = hostData.get('hostList')
         dispatch(updateHost(id, {
             switched
-        }))
+        }, searchValue, hostList))
         updateHostFile()        
     }
     delHost(id, e) { 
         const { dispatch } = this.props
         dispatch(delHost(id))
     }
-    checkActiveHost(id, e) {
+    checkActiveHost(id, searchValue, hostList, e) {
         const { dispatch, activeHost } = this.props
         if(activeHost.get('data').get('id') !== id) {
             // if click close out
             if(!e.target.isEqualNode(this.refs.close)) {
-                dispatch(checkActiveHost(id))
+                dispatch(checkActiveHost(id, searchValue, hostList))
             }
         }
     }
@@ -131,8 +140,8 @@ class Item extends Component {
         }
     }
     render() {
-        let { dispatch, activeHost } = this.props
-        const { id, name, switched } = this.props.host
+        let { dispatch, activeHost, hostData } = this.props
+        const { id, name, switched, style } = this.props.host
         const { inputType, isDrag, draggable } = this.state
         if(id === undefined) return
         activeHost = activeHost.toObject()
@@ -147,11 +156,13 @@ class Item extends Component {
             className += ' drag'
         }
         let liProps = {
-            onClick: this.checkActiveHost.bind(this, id)
+            onClick: this.checkActiveHost.bind(this, id, hostData.get('searchValue'), hostData.get('hostList')),
+            style: style
         }
         if(draggable) {
             liProps = {
-                onClick: this.checkActiveHost.bind(this, id),
+                onClick: this.checkActiveHost.bind(this, id, hostData.get('searchValue'), hostData.get('hostList')),
+                style: style,
                 draggable: draggable,
                 onDragOver: this.handleDragOver.bind(this),
                 onDragLeave: this.handleDragLeave.bind(this),
@@ -163,7 +174,9 @@ class Item extends Component {
             <li className={className} {...liProps}>
                 <i className="iconfont icon-chachada icon-close-self float-left" ref="close" onClick={this.delHost.bind(this, id)}></i>
                 {
-                    inputType === 'text' ? <div className="hosts-name" onDoubleClick={this.handleChangeDom.bind(this)}>{name}</div> : <input className="update-name" type="text" defaultValue={name} onKeyUp={this.handleKeyUp.bind(this, id)} onBlur={this.handleBlur.bind(this, id)} ref="updateName" /> 
+                    inputType === 'text' ? 
+                    (<div className="hosts-name" onDoubleClick={this.handleChangeDom.bind(this)} dangerouslySetInnerHTML={{__html: name}}></div>) : 
+                    (<input className="update-name" type="text" defaultValue={name} onKeyUp={this.handleKeyUp.bind(this, id)} onBlur={this.handleBlur.bind(this, id)} ref="updateName" />)
                 }
                 <div className="float-right switch-box" onClick={this.updateSwitched.bind(this, id, !switched)}>
                     <i className={switched ? 'switch active' : 'switch'}></i>
@@ -178,11 +191,12 @@ class List extends Component {
         super(props)
     }
     render() {
-        const { dispatch, hostList, activeHost } = this.props
+        const { dispatch, hostData, activeHost } = this.props
+        const hostList = hostData.get('hostList')
         const Lists = hostList.map((v, ix) => {
             v = v.toObject()
             return (
-                <Item dispatch={dispatch} host={v} activeHost={activeHost}></Item>
+                <Item dispatch={dispatch} host={v} activeHost={activeHost} hostData={hostData}></Item>
             )
         })
         _type = activeHost.get('type')
@@ -195,8 +209,9 @@ class List extends Component {
 }
 
 function select(state) {
+    _hostData = state.hostData
     return {
-        hostList: state.hostList,
+        hostData: state.hostData,
         activeHost: state.activeHost
     }
 }

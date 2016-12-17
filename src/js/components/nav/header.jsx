@@ -2,8 +2,11 @@ const { Component } = React
 const electron = require('electron')
 const ipcRenderer = electron.ipcRenderer
 import { connect } from 'react-redux'
-import { addHost } from '../../actions/root'
-
+import { 
+    addHost,
+    filterHost
+} from '../../actions/root'
+import Search from '../../../../model/search'
 
 class Header extends Component {
     constructor(props) {
@@ -21,6 +24,7 @@ class Header extends Component {
         ipcRenderer.on('search-reply', (event, arg) => {
             if(arg === 'trigger') {
                 searchDom.focus()
+                searchDom.select()
                 this.setState({
                     inputType: 'search'
                 })
@@ -36,14 +40,22 @@ class Header extends Component {
         }
     }
 
-    handleKeyUp(e) {
+    handleKeyUp(e, type) {
         const { dispatch } = this.props
-        if(e.keyCode === 13) {
-            if(this.state.inputType === 'create') {
+        // if(e.keyCode === 13) {
+        //     if(this.state.inputType === 'create') {
+        //         this.createNode(dispatch)
+        //     } else {
+        //         console.log('search');
+        //     }
+        // }
+        if(this.state.inputType === 'create') {
+            if(e.keyCode === 13) {
                 this.createNode(dispatch)
-            } else {
-                console.log('search');
             }
+        } else {
+            const value = this.refs.search.value
+            dispatch(filterHost(value))
         }
     }
 
@@ -81,8 +93,8 @@ class Header extends Component {
                     type="text" 
                     placeholder={
                         inputType === 'create' ? '新建模块' : '搜索' 
-                    } 
-                    ref="search" onKeyUp={this.handleKeyUp.bind(this)}  />
+                    }
+                    ref="search" onKeyUp={this.handleKeyUp.bind(this)} />
                 {
                     inputType === 'create' ?
                     (

@@ -105,20 +105,6 @@ function checkActiveAll() {
 
 // id1, id2, 
 function exchange(id, currentId) {
-    // let host1 = db.get(TABLE_HOST_NAME).filter({id: id1}).value()[0]
-    // host1 = IT.fromJS(host1)
-    // host1 = host1.set('exchangeTag', true)    
-    // let host2 = db.get(TABLE_HOST_NAME).filter({id: id2}).value()[0]
-    // host2 = IT.fromJS(host2)
-    // db.get(TABLE_HOST_NAME).find({
-    //     id: id2,
-    // }).assign(host1.toObject()).value()
-    // db.get(TABLE_HOST_NAME).find({
-    //     id: id1,
-    //     exchangeTag: false
-    // }).assign(host2.toObject()).value()
-    // db.get(TABLE_HOST_NAME).find({id: id1}).assign({exchangeTag: false}).value()
-    // return defaultReturn()
     const hostList = defaultReturn()[1]
     const exchanges = require('../model/exchange')
     let tempHostList

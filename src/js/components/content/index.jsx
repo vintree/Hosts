@@ -1,12 +1,12 @@
 import './index.scss'
 const { Component } = React
 import { connect } from 'react-redux'
+import IT from 'immutable'
 import { 
     updateHost,
     showLoading,
     hideLoading
 } from '../../actions/root'
-
 import formatLabel from '../../../../model/format-label'
 import updateHostFile from '../../../../model/update-host'
 
@@ -42,11 +42,14 @@ function formatContent(activeHost) {
     return content
 }
 
-class Index extends Component {
+class Content extends Component {
     constructor(props) {
         super(props);
     }
     componentDidMount() {
+        const { hostData } = this.props
+        const searchValue = hostData.get('searchValue')
+        const hostList = hostData.get('hostList')
         editor = CodeMirror.fromTextArea(document.getElementById("code"), option);
         editor.on('change', (editor1, changes) => {
             let content = editor.getValue()
@@ -55,39 +58,40 @@ class Index extends Component {
             if(activeHost.type !== 'all') {
                 dispatch(updateHost(activeHost.data.get('id'), {
                     content: content
-                }))
+                }, searchValue, hostList))
             }
         })
     }
+    shouldComponentUpdate(nextProps, nextState) {
+        return !IT.is(nextProps.activeHost, this.props.activeHost)
+    }
     componentDidUpdate() {
-        let { dispatch, activeHost } = this.props
+        let { dispatch, activeHost, hostData } = this.props
+        const searchValue = hostData.get('searchValue')
+        const hostList = hostData.get('hostList')
         let content = ''
         const codeMirrorDOM = document.querySelector('.CodeMirror.cm-s-default')
         
         codeMirrorDOM.parentNode.removeChild(codeMirrorDOM)
         activeHost = activeHost.toObject()
         content = formatContent(activeHost)
-
         editor = CodeMirror.fromTextArea(document.getElementById("code"), option);
         editor.on('change', (editor1, changes) => {
             let content = editor.getValue()
-            let { dispatch, activeHost } = this.props 
+            let { dispatch, activeHost } = this.props
             activeHost = activeHost.toObject()
-
             // loading
             if(!!loading_t) {
                 // 自动结束
                 if(loading_isEnd) {
-                    // dispatch(showLoading())
                     clearTimeout(loading_t)
                     loading_isEnd = false
                     loading_t = setTimeout(() => {
                         loading_isEnd = true
-                        // dispatch(hideLoading())
-                        if(activeHost.type !== 'all') {
+                        if(activeHost.type !== 'all') {                            
                             dispatch(updateHost(activeHost.data.get('id'), {
                                 content: content
-                            }))
+                            }, searchValue, hostList))
                         }
                         // 修改host文件
                         updateHostFile()
@@ -97,33 +101,41 @@ class Index extends Component {
                     clearTimeout(loading_t)
                     loading_t = setTimeout(() => {
                         loading_isEnd = true
-                        // dispatch(hideLoading())
                         if(activeHost.type !== 'all') {
                             dispatch(updateHost(activeHost.data.get('id'), {
                                 content: content
-                            }))
+                            }, searchValue, hostList))
                         }
                         // 修改host文件
                         updateHostFile()
                     }, 100)
                 }
             } else {
-                // dispatch(showLoading())
                 loading_isEnd = false
                 loading_t = setTimeout(() => {
                     loading_isEnd = true
-                    // dispatch(hideLoading())
                     if(activeHost.type !== 'all') {
                         dispatch(updateHost(activeHost.data.get('id'), {
                             content: content
-                        }))
+                        }, searchValue, hostList))
                     }
                     // 修改host文件
                     updateHostFile()
                 }, 100)
             }
         })
+
         editor.setValue(content)
+
+        // 如果搜索词，筛选一遍
+        // const searchValue = hostData.get('searchValue')
+        if(searchValue) {
+            const contentSource = document.querySelector('.CodeMirror-code').innerHTML
+            const contentFransform = require('../../../../model/search').filterContent(searchValue, contentSource)
+            if(contentSource !== contentFransform) {
+                document.querySelector('.CodeMirror-code').innerHTML = contentFransform
+            }
+        }
     }
     render() {
         let { activeHost } = this.props
@@ -139,8 +151,9 @@ class Index extends Component {
 
 function select(state) {
     return {
-        activeHost: state.activeHost
+        activeHost: state.activeHost,
+        hostData: state.hostData
     }
 }
 
-export default connect(select)(Index) 
+export default connect(select)(Content)

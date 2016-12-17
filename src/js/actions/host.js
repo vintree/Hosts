@@ -4,9 +4,10 @@ import {
     UPDATE_HOST,
     CHECK_HOST,
     CHECK_HOST_ALL,
-    EXCHANGE_HOST
+    EXCHANGE_HOST,
+    FILTER_HOST
 } from '../constants/host.js'
-
+import IT from 'immutable'
 import DBHost from '../../../db-model/host.js'
 
 export default {
@@ -22,16 +23,38 @@ export default {
             hostList: DBHost.delHost(id)['1']
         }
     },
-    updateHost: (id, prepareData) => {
+    updateHost: (id, prepareData, searchValue, hostList) => {
+        let _hostList = DBHost.update(id, prepareData)['1']
+        if(searchValue && hostList && hostList.size !== 0) {
+            for(let i = 0, l = hostList.size; i < l; i++) {
+                if(hostList.get(i).get('id') === id) {
+                    console.log('prepareData', prepareData);
+                    const hostItem = hostList.get(i).merge(IT.fromJS(prepareData))
+
+                    console.log(hostItem.toObject());
+
+                    hostList = hostList.set(i, hostItem)
+                    _hostList = hostList
+                }
+            }
+        }
         return {
             type: UPDATE_HOST,
-            hostList: DBHost.update(id, prepareData)['1']
+            searchValue: searchValue,
+            hostList: _hostList
         }
     },
     exchangeHost: (id1, id2) => {
         return {
             type: EXCHANGE_HOST,
             hostList: DBHost.exchange(id1, id2)
+        }
+    },
+    filterHost: (value) => {
+        return {
+            type: FILTER_HOST,
+            searchValue: value,
+            hostList: require('../../../model/search').filterList(value)
         }
     }
 }
