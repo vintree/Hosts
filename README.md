@@ -4,7 +4,7 @@
 
 Hosts是一个基于host的综合管理工具，其中集成了插件管理功能，可用React + nodeJs编写你喜欢的插件！
 
-Hosts是一款基于Electron + React开发出来的桌面级应用，Hosts和其他Host管理工具在功能上没有太大的差异，但Hosts有着工程师感觉的交互体验，以及清爽的UI视觉
+Hosts是一款Electron + React开发出来的桌面级应用，Hosts和其他Host管理工具在功能上没有太大的差异，但Hosts有着工程师感觉的交互体验，以及清爽的UI视觉
 
 Hosts使用了VSCode、Atom一样的框架（Electron），当然这不是Hosts的唯一方案，Hosts初期使用了钉钉采用的框架方案(NW)，因为一些原因，最后换成了Electron
 
