@@ -8,7 +8,8 @@ Hosts和其他Host管理工具在功能上没有太大的差异，但Hosts有着
 
 更加令人惊喜的是，前端框架使用了React + Redux + Immutable，这可能是React在其他体系的最佳实践
 
-### v1.20版本已经支持插件功能
+### v1.2.0以上版本已经支持插件功能（后续给出插件文档）
+
 ![](https://github.com/wuguzi/Hosts/blob/master/showImg/_8.png?raw=true)
 
 
