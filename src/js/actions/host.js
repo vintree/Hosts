@@ -28,11 +28,7 @@ export default {
         if(searchValue && hostList && hostList.size !== 0) {
             for(let i = 0, l = hostList.size; i < l; i++) {
                 if(hostList.get(i).get('id') === id) {
-                    console.log('prepareData', prepareData);
                     const hostItem = hostList.get(i).merge(IT.fromJS(prepareData))
-
-                    console.log(hostItem.toObject());
-
                     hostList = hostList.set(i, hostItem)
                     _hostList = hostList
                 }

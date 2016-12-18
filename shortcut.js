@@ -17,9 +17,9 @@ exports.cmdOrCtrl_w = function() {
 }
 
 exports.cmdOrCtrl_f = function() {
-    globalShortcut.register('CmdOrCtrl+f', () => {
-        searchEvent.sender.send('search-reply', 'trigger')
-    })
+    // globalShortcut.register('CmdOrCtrl+f', () => {
+    //     searchEvent.sender.send('search-reply', 'trigger')
+    // })
 }
 
 exports.unregisterAll = function() {

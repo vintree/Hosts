@@ -24,6 +24,7 @@ let option = {
     readOnly : 'nocursor',  // 是否只读，默认false, nocursor
     showCursorWhenSelecting : true,
     lineNumbers : true,  // 是否显示行号
+    extraKeys: {"Alt-F": "findPersistent"}
 }
 
 function formatContent(activeHost) {
@@ -129,13 +130,13 @@ class Content extends Component {
 
         // 如果搜索词，筛选一遍
         // const searchValue = hostData.get('searchValue')
-        if(searchValue) {
-            const contentSource = document.querySelector('.CodeMirror-code').innerHTML
-            const contentFransform = require('../../../../model/search').filterContent(searchValue, contentSource)
-            if(contentSource !== contentFransform) {
-                document.querySelector('.CodeMirror-code').innerHTML = contentFransform
-            }
-        }
+        // if(searchValue) {
+        //     const contentSource = document.querySelector('.CodeMirror-code').innerHTML
+        //     const contentFransform = require('../../../../model/search').filterContent(searchValue, contentSource)
+        //     if(contentSource !== contentFransform) {
+        //         document.querySelector('.CodeMirror-code').innerHTML = contentFransform
+        //     }
+        // }
     }
     render() {
         let { activeHost } = this.props

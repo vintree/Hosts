@@ -157,12 +157,10 @@ class Item extends Component {
         }
         let liProps = {
             onClick: this.checkActiveHost.bind(this, id, hostData.get('searchValue'), hostData.get('hostList')),
-            style: style
         }
         if(draggable) {
             liProps = {
                 onClick: this.checkActiveHost.bind(this, id, hostData.get('searchValue'), hostData.get('hostList')),
-                style: style,
                 draggable: draggable,
                 onDragOver: this.handleDragOver.bind(this),
                 onDragLeave: this.handleDragLeave.bind(this),
@@ -175,7 +173,11 @@ class Item extends Component {
                 <i className="iconfont icon-chachada icon-close-self float-left" ref="close" onClick={this.delHost.bind(this, id)}></i>
                 {
                     inputType === 'text' ? 
-                    (<div className="hosts-name" onDoubleClick={this.handleChangeDom.bind(this)} dangerouslySetInnerHTML={{__html: name}}></div>) : 
+                    (
+                        <div className="hosts-name">
+                            <span style={style} onDoubleClick={this.handleChangeDom.bind(this)} dangerouslySetInnerHTML={{__html: name}}></span>
+                        </div>
+                    ) : 
                     (<input className="update-name" type="text" defaultValue={name} onKeyUp={this.handleKeyUp.bind(this, id)} onBlur={this.handleBlur.bind(this, id)} ref="updateName" />)
                 }
                 <div className="float-right switch-box" onClick={this.updateSwitched.bind(this, id, !switched)}>

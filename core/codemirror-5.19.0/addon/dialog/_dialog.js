@@ -35,34 +35,28 @@
   }
 
   CodeMirror.defineExtension("openDialog", function(template, callback, options) {
-    // console.log('template', template);
-    // console.log('options11', options);
-    // if (!options) options = {};
+    if (!options) options = {};
 
-    // closeNotification(this, null);
+    closeNotification(this, null);
 
     var dialog = dialogDiv(this, template, options.bottom);
-    // console.log('dialog', dialog);
-    // console.log('options.bottom', options.bottom);
     var closed = false, me = this;
-    // console.log('me', me);
     function close(newVal) {
-      // if (typeof newVal == 'string') {
-      //   inp.value = newVal;
-      // } else {
-      //   if (closed) return;
-      //   closed = true;
-      //   dialog.parentNode.removeChild(dialog);
-      //   me.focus();
+      if (typeof newVal == 'string') {
+        inp.value = newVal;
+      } else {
+        if (closed) return;
+        closed = true;
+        dialog.parentNode.removeChild(dialog);
+        me.focus();
 
-      //   if (options.onClose) options.onClose(dialog);
-      // }
+        if (options.onClose) options.onClose(dialog);
+      }
     }
 
     var inp = dialog.getElementsByTagName("input")[0], button;
     if (inp) {
-
-      // inp.focus();
+      inp.focus();
 
       if (options.value) {
         inp.value = options.value;
@@ -71,55 +65,36 @@
         }
       }
 
-      console.log('options22', options);
-      CodeMirror.on(inp, "input", function(e) { 
-        // options.onInput(e, inp.value, close);}
-        console.log('input', e, e.target.value);
-        CodeMirror.e_stop(e);
-        // me.focus();
-        // callback(inp.value, e);
-        callback('log', e);
+      if (options.onInput)
+        CodeMirror.on(inp, "input", function(e) { options.onInput(e, inp.value, close);});
+      if (options.onKeyUp)
+        CodeMirror.on(inp, "keyup", function(e) {options.onKeyUp(e, inp.value, close);});
+
+      CodeMirror.on(inp, "keydown", function(e) {
+        if (options && options.onKeyDown && options.onKeyDown(e, inp.value, close)) { return; }
+        if (e.keyCode == 27 || (options.closeOnEnter !== false && e.keyCode == 13)) {
+          inp.blur();
+          CodeMirror.e_stop(e);
+          close();
+        }
+        if (e.keyCode == 13) callback(inp.value, e);
       });
-      
 
-
-      // if (options.onInput)
-      //   CodeMirror.on(inp, "input", function(e) { options.onInput(e, inp.value, close);});
-      // if (options.onKeyUp)
-      //   CodeMirror.on(inp, "keyup", function(e) {options.onKeyUp(e, inp.value, close);});
-
-      // CodeMirror.on(inp, "keydown", function(e) {
-      //   if (options && options.onKeyDown && options.onKeyDown(e, inp.value, close)) { return; }
-      //   if (e.keyCode == 27 || (options.closeOnEnter !== false && e.keyCode == 13)) {
-      //     inp.blur();
-      //     CodeMirror.e_stop(e);
-      //     console.log('e', e);
-      //     console.log('value', e.target.value);          
-      //     me.focus();
-          
-      //     // close();
-      //   }
-      //   if (e.keyCode == 13) callback(inp.value, e);
-      // });
-      // alert('1111')
-      // if (options.closeOnBlur !== false) CodeMirror.on(inp, "blur", close);
+      if (options.closeOnBlur !== false) CodeMirror.on(inp, "blur", close);
     } else if (button = dialog.getElementsByTagName("button")[0]) {
       CodeMirror.on(button, "click", function() {
         close();
         me.focus();
       });
 
-      // if (options.closeOnBlur !== false) CodeMirror.on(button, "blur", close);
+      if (options.closeOnBlur !== false) CodeMirror.on(button, "blur", close);
 
       button.focus();
-          
-      
     }
     return close;
   });
 
   CodeMirror.defineExtension("openConfirm", function(template, callbacks, options) {
-    console.log('openConfirm', options);
     closeNotification(this, null);
     var dialog = dialogDiv(this, template, options && options.bottom);
     var buttons = dialog.getElementsByTagName("button");
@@ -157,7 +132,6 @@
    * currently opened one and open the new one immediately.
    */
   CodeMirror.defineExtension("openNotification", function(template, options) {
-    console.log('openNotification', options);
     closeNotification(this, close);
     var dialog = dialogDiv(this, template, options && options.bottom);
     var closed = false, doneTimer;
