@@ -19,10 +19,11 @@ Hosts使用了VSCode、Atom一样的框架（Electron），当然这不是Hosts�
 
 上面有提到Hosts是一个带有工程师感觉的工具，免去了很多不必要的交互，可能上手需要习惯一下！
 
-![](https://github.com/wuguzi/Hosts/blob/master/showImg/1.png?raw=true)
+![](https://github.com/wuguzi/Hosts/blob/master/showImg/7.png?raw=true)
 
 在此处新建你的新模块，可以回车、可以点击旁边的+号，新的模块被创建了
-![](https://github.com/wuguzi/Hosts/blob/master/showImg/2.png?raw=true)
+
+![](https://github.com/wuguzi/Hosts/blob/master/showImg/3.png?raw=true)
 
 新模块名字叫Hi 我是新模块
 
@@ -33,13 +34,16 @@ Hosts使用了VSCode、Atom一样的框架（Electron），当然这不是Hosts�
 右边有一个圆点，灰色表示未激活、绿色表示已激活，点击切换
 
 再在模块右侧的编辑我们新的Host吧，并且支持高亮！
-![](https://github.com/wuguzi/Hosts/blob/master/showImg/3.png?raw=true)
 
-当然模块多了，有时需要换一个位置，当然支持，点击模块，拖拽到想要交换的Hosts上，即完成了交换
 ![](https://github.com/wuguzi/Hosts/blob/master/showImg/4.png?raw=true)
 
+当然模块多了，有时需要换一个位置，当然支持，点击模块，拖拽到想要交换的Hosts上，即完成了交换
+
+![](https://github.com/wuguzi/Hosts/blob/master/showImg/6.png?raw=true)
+
 这些基本够用，需要为方便考虑，支持在通知栏切换模块
-![](https://github.com/wuguzi/Hosts/blob/master/showImg/5.png?raw=true)
+
+![](https://github.com/wuguzi/Hosts/blob/master/showImg/1.png?raw=true)
 
 简单的使用教程基本结束了，更多细节还是要自己「把玩」
 
@@ -50,12 +54,14 @@ Hosts使用了VSCode、Atom一样的框架（Electron），当然这不是Hosts�
 但有时候感觉并没有生效，实际上Hosts切换已经成功，但如果在Chrome下，可爱的Chrome会帮助我们再做一次缓存，这就是没有生效的原因，由于Chrome是一个黑盒操作，目前没有很好的办法解决这个问题，有一个暴力清理的方案，但不是很实用，最后没有放置在Hosts
 
 现在有一个折中方案，如果切换Hosts没有生效，可以在Chrome中进入chrome://net-internals/#sockets，点击红色区域，即可焕然一新，就可以欢快的玩页面！
-![](https://github.com/wuguzi/Hosts/blob/master/showImg/6.png?raw=true)
+
+![](https://github.com/wuguzi/Hosts/blob/master/showImg/5.png?raw=true)
 
 目前支持Mac版，部分Mac机器需要授权才能打开
 
 左上角苹果标志-> 系统偏好设置 -> 安全性与隐私 ，进入后在下面的红色区域会有一个提示，是否仍要打开Hosts，点击仍要打开即可！
-![](https://github.com/wuguzi/Hosts/blob/master/showImg/7.png?raw=true)
+
+![](https://github.com/wuguzi/Hosts/blob/master/showImg/2.png?raw=true)
 
 ### 支持系统
 Mac
