@@ -34,6 +34,8 @@
     cm.state.currentNotificationClose = newVal;
   }
 
+  console.log('CodeMirror,,,', CodeMirror);
+
   CodeMirror.defineExtension("openDialog", function(template, callback, options) {
     // console.log('template', template);
     // console.log('options11', options);
@@ -45,7 +47,7 @@
     // console.log('dialog', dialog);
     // console.log('options.bottom', options.bottom);
     var closed = false, me = this;
-    // console.log('me', me);
+    console.log('me', me);
     function close(newVal) {
       // if (typeof newVal == 'string') {
       //   inp.value = newVal;
@@ -104,6 +106,7 @@
       // alert('1111')
       // if (options.closeOnBlur !== false) CodeMirror.on(inp, "blur", close);
     } else if (button = dialog.getElementsByTagName("button")[0]) {
+      console.log('////////////');
       CodeMirror.on(button, "click", function() {
         close();
         me.focus();
