@@ -10,7 +10,8 @@
     "dev": "webpack -w",
     "r": "webpack --config webpack.releas.js -w",
     "package": "build --dir",
-    "dist": "build --mac"
+    "dist": "build --mac",
+    "ep": "electron-packager ./app Hosts --platform=darwin --icon=./build/icon.icns --overwrite --out ./ep --version=1.2.2"
   },
   "author": "puxiao",
   "keywords": [
