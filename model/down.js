@@ -2,9 +2,8 @@ const electron = require('electron')
 const userData = electron.remote.app.getPath('userData')
 const fs = require('fs')
 const githubDownload = require('github-download')
-const ipAdress = require('./ip-adress')
-
 const fileDownload = require('download-file')
+const ipAdress = require('./ip-adress')
 const command = require('./command/core')
 const mkdir = require('./mkdir')
 

@@ -28,7 +28,7 @@ function createWindow() {
     win.loadURL(`file://${__dirname}/app/index.html`)
 
     // 打开开发工具页面
-    win.webContents.openDevTools()
+    // win.webContents.openDevTools()
 
     require('./menu')()
     require('./tray')(win)
@@ -141,6 +141,7 @@ app.on('browser-window-blur', function() {
     shortcut.unregisterAll()
 })
 app.on('browser-window-focus', function() {
+    shortcut.f12()
     shortcut.cmdOrCtrl_w()
     shortcut.cmdOrCtrl_f()
 })

@@ -16,15 +16,15 @@ let editor
 let loading_t = undefined
 let loading_isEnd = true
 let option = {
-    value : "http://www.cnblogs.com/oldphper",  // 文本域默认显示的文本
-    mode : "javascript",  // 模式
+    value : 'http://www.cnblogs.com/oldphper',  // 文本域默认显示的文本
+    mode : 'javascript',  // 模式
     indentUnit : 2,  // 缩进单位，默认2
     smartIndent : true,  // 是否智能缩进
     tabSize : 4,  // Tab缩进，默认4
     readOnly : 'nocursor',  // 是否只读，默认false, nocursor
     showCursorWhenSelecting : true,
     lineNumbers : true,  // 是否显示行号
-    extraKeys: {"Alt-F": "findPersistent"}
+    extraKeys: {'Alt-F': 'findPersistent'}
 }
 
 function formatContent(activeHost) {
