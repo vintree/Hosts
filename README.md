@@ -2,8 +2,7 @@
 [![Build Status](https://travis-ci.org/wuguzi/Hosts.svg?branch=master)](https://travis-ci.org/wuguzi/Hosts)
 [![Stories in Ready](https://badge.waffle.io/wuguzi/Hosts.png?label=ready&title=Ready)](http://waffle.io/wuguzi/Hosts)
 
-
-![](https://github.com/wuguzi/Hosts/blob/master/build/Mac/icon_128x128@2x.png?raw=true)
+![](https://github.com/wuguzi/Hosts/blob/master/build/Mac/icon_32x32@2x.png?raw=true)
 
 Hosts是一个基于host的综合管理工具，其中集成了插件管理功能，可用React + nodeJs编写你喜欢的插件！
 
@@ -11,9 +10,12 @@ Hosts和其他Host管理工具在功能上没有太大的差异，但Hosts有着
 
 更加令人惊喜的是，前端框架使用了React + Redux + Immutable，这可能是React在其他体系的最佳实践
 
+### v1.3.0以上版本支持颜色标记
+![](https://github.com/wuguzi/Hosts/blob/master/showImg/v1/1.png?raw=true)
+
 ### v1.2.0以上版本已经支持插件功能（后续给出插件文档）
 
-![](https://github.com/wuguzi/Hosts/blob/master/showImg/_8.png?raw=true)
+![](https://github.com/wuguzi/Hosts/blob/master/showImg/8.png?raw=true)
 
 
 ### 教程
