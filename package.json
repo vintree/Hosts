@@ -66,6 +66,7 @@
     "node-sass": "^3.4.2",
     "postcss-loader": "^0.13.0",
     "rc": "^1.1.6",
+    "react": "^15.4.1",
     "react-redux": "^4.4.5",
     "redux": "^3.6.0",
     "sass-loader": "^4.0.2",
