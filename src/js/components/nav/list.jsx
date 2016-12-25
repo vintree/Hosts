@@ -169,20 +169,30 @@ class Item extends Component {
         }
 
         return (
-            <li className={className} {...liProps}>
-                <i className="iconfont icon-chachada icon-close-self float-left" ref="close" onClick={this.delHost.bind(this, id)}></i>
-                {
-                    inputType === 'text' ? 
-                    (
-                        <div className="hosts-name">
-                            <span style={style} onDoubleClick={this.handleChangeDom.bind(this)} dangerouslySetInnerHTML={{__html: name}}></span>
-                        </div>
-                    ) : 
-                    (<input className="update-name" type="text" defaultValue={name} onKeyUp={this.handleKeyUp.bind(this, id)} onBlur={this.handleBlur.bind(this, id)} ref="updateName" />)
-                }
-                <div className="float-right switch-box" onClick={this.updateSwitched.bind(this, id, !switched)}>
-                    <i className={switched ? 'switch active' : 'switch'}></i>
+            <li className="item-box">
+                <div className={className} {...liProps}>
+                    <i className="iconfont icon-chachada icon-close-self float-left" ref="close" onClick={this.delHost.bind(this, id)}></i>
+                    {
+                        inputType === 'text' ? 
+                        (
+                            <div className="hosts-name">
+                                <span style={style} onDoubleClick={this.handleChangeDom.bind(this)} dangerouslySetInnerHTML={{__html: name}}></span>
+                            </div>
+                        ) : 
+                        (<input className="update-name" type="text" defaultValue={name} onKeyUp={this.handleKeyUp.bind(this, id)} onBlur={this.handleBlur.bind(this, id)} ref="updateName" />)
+                    }
+                    <div className="float-right switch-box" onClick={this.updateSwitched.bind(this, id, !switched)}>
+                        <i className={switched ? 'switch active' : 'switch'}></i>
+                    </div>
                 </div>
+                <ul className="color-list hide">
+                    <li className="color-item"><span className="color-icon yellow"></span></li>
+                    <li className="color-item"><span className="color-icon red"></span></li>
+                    <li className="color-item"><span className="color-icon orange"></span></li>
+                    <li className="color-item"><span className="color-icon green"></span></li>
+                    <li className="color-item"><span className="color-icon blue"></span></li>
+                    <li className="color-item"><span className="color-icon purple"></span></li>
+                </ul>
             </li>
         )
     }

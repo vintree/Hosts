@@ -43,3 +43,51 @@
         border-right: $width solid $color;
     }
 }
+
+// flex-------------------------------------------------------
+@mixin flex-base {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
+@mixin flexCenter {
+    @include flex-base;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;//垂直
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;//水品
+}
+
+@mixin flexRow {
+    @include flex-base;
+    flex-flow: row;
+}
+
+@mixin flexColumn {
+    @include flex-base;
+    flex-flow: column;
+    //flex-direction: column;
+}
+
+@mixin flex($s: 1) {
+    -moz-box-flex: $s; /*Firefox*/
+    -webkit-box-flex: $s; /*Safari,Opera,Chrome*/
+    box-flex: $s;
+    flex: $s;
+}
+
+@mixin flexNum($s: 1) {
+    -moz-box-flex: $s; /*Firefox*/
+    -webkit-box-flex: $s; /*Safari,Opera,Chrome*/
+    box-flex: $s;
+    flex: $s;
+}
