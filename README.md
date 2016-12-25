@@ -15,8 +15,7 @@ Hosts和其他Host管理工具在功能上没有太大的差异，但Hosts有着
 
 ### v1.2.0以上版本已经支持插件功能（后续给出插件文档）
 
-![](https://github.com/wuguzi/Hosts/blob/master/showImg/8.png?raw=true)
-
+![](https://github.com/wuguzi/Hosts/blob/master/showImg/9.png?raw=true)
 
 ### 教程
 了解一下Hosts如何操作！
