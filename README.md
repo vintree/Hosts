@@ -1,4 +1,5 @@
 # Hosts
+[![Build Status](https://travis-ci.org/wuguzi/Hosts.svg?branch=master)](https://travis-ci.org/wuguzi/Hosts)
 
 ![](https://github.com/wuguzi/Hosts/blob/master/build/Mac/icon_128x128@2x.png?raw=true)
 
