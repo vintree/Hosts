@@ -39,8 +39,7 @@ class Item extends Component {
             inputType: 'text',
             draggable: true,
             isDrag: false,
-            isShowTag: false,
-            color: null
+            isShowTag: false
         }
     }
     componentDidUpdate() {
@@ -102,9 +101,18 @@ class Item extends Component {
         dispatch(updateHost(id, {
             switched
         }, searchValue, hostList))
-        updateHostFile()        
+        updateHostFile()
     }
-    delHost(id, e) { 
+    updateColor(id, color) {
+        const { dispatch, hostData } = this.props
+        const searchValue = hostData.get('searchValue')
+        const hostList = hostData.get('hostList')
+        dispatch(updateHost(id, {
+            color
+        }, searchValue, hostList))
+        updateHostFile()
+    }
+    delHost(id, e) {
         const { dispatch } = this.props
         dispatch(delHost(id))
     }
@@ -160,15 +168,10 @@ class Item extends Component {
             isShowTag: false
         })
     }
-    handleSetColor(color, event) {
-        this.setState({
-            color
-        })
-    }
     render() {
         let { dispatch, activeHost, hostData } = this.props
-        const { id, name, switched, style } = this.props.host
-        const { inputType, isDrag, draggable, isShowTag, color } = this.state
+        const { id, name, switched, style, color } = this.props.host
+        const { inputType, isDrag, draggable, isShowTag } = this.state
         if(id === undefined) return
         activeHost = activeHost.toObject()
         let className = 'item'
@@ -216,12 +219,12 @@ class Item extends Component {
                 <ul className={
                     isShowTag ? 'color-list' : 'color-list hide'
                 }>
-                    <li className="color-item"><span className="color-icon yellow" onClick={this.handleSetColor.bind(this, '#F2C53E')}></span></li>
-                    <li className="color-item"><span className="color-icon red" onClick={this.handleSetColor.bind(this, '#fc4c50')}></span></li>
-                    <li className="color-item"><span className="color-icon orange" onClick={this.handleSetColor.bind(this, '#f59739')}></span></li>
-                    <li className="color-item"><span className="color-icon green" onClick={this.handleSetColor.bind(this, '#65c43c')}></span></li>
-                    <li className="color-item"><span className="color-icon blue" onClick={this.handleSetColor.bind(this, '#4ba9f1')}></span></li>
-                    <li className="color-item"><span className="color-icon purple" onClick={this.handleSetColor.bind(this, '#c471d9')}></span></li>
+                    <li className="color-item"><span className="color-icon yellow" onClick={this.updateColor.bind(this, id, '#F2C53E')}></span></li>
+                    <li className="color-item"><span className="color-icon red" onClick={this.updateColor.bind(this, id, '#fc4c50')}></span></li>
+                    <li className="color-item"><span className="color-icon orange" onClick={this.updateColor.bind(this, id, '#f59739')}></span></li>
+                    <li className="color-item"><span className="color-icon green" onClick={this.updateColor.bind(this, id, '#65c43c')}></span></li>
+                    <li className="color-item"><span className="color-icon blue" onClick={this.updateColor.bind(this, id, '#4ba9f1')}></span></li>
+                    <li className="color-item"><span className="color-icon purple" onClick={this.updateColor.bind(this, id, '#c471d9')}></span></li>
                     <li className="color-item"><span className="color-close iconfont icon-guanbi icon-guanbi-self" onClick={this.handleCloseColor.bind(this)}></span></li>
                 </ul>
             </li>
