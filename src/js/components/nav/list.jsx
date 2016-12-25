@@ -16,6 +16,7 @@ let activeId = null
 let dragOverId = null
 let _type = null
 let _hostData = null
+let mouseDownT = null
 
 ipcRenderer.on('hostList', (event, arg) => {
     const { dispatch } = window.store
@@ -30,13 +31,16 @@ ipcRenderer.on('hostList', (event, arg) => {
     }
 })
 
+
 class Item extends Component {
     constructor(props) {
         super(props)
         this.state = {
             inputType: 'text',
             draggable: true,
-            isDrag: false
+            isDrag: false,
+            isShowTag: false,
+            color: null
         }
     }
     componentDidUpdate() {
@@ -139,10 +143,32 @@ class Item extends Component {
             updateHostFile()
         }
     }
+    handleMouseDown() {
+        mouseDownT = setTimeout(() => {
+            this.setState({
+                isShowTag: true
+            })
+        }, 1000);
+    }
+    handleMouseUp() {
+        if(mouseDownT) {
+            clearTimeout(mouseDownT)
+        }
+    }
+    handleCloseColor() {
+        this.setState({
+            isShowTag: false
+        })
+    }
+    handleSetColor(color, event) {
+        this.setState({
+            color
+        })
+    }
     render() {
         let { dispatch, activeHost, hostData } = this.props
         const { id, name, switched, style } = this.props.host
-        const { inputType, isDrag, draggable } = this.state
+        const { inputType, isDrag, draggable, isShowTag, color } = this.state
         if(id === undefined) return
         activeHost = activeHost.toObject()
         let className = 'item'
@@ -167,9 +193,11 @@ class Item extends Component {
                 onDragEnd: this.handleDrop.bind(this)
             }
         }
-
+        let itemStyle = {
+            borderColor: color
+        }
         return (
-            <li className="item-box">
+            <li className="item-box" onMouseDown={this.handleMouseDown.bind(this)} onMouseUp={this.handleMouseUp.bind(this)} style={itemStyle}>
                 <div className={className} {...liProps}>
                     <i className="iconfont icon-chachada icon-close-self float-left" ref="close" onClick={this.delHost.bind(this, id)}></i>
                     {
@@ -185,13 +213,16 @@ class Item extends Component {
                         <i className={switched ? 'switch active' : 'switch'}></i>
                     </div>
                 </div>
-                <ul className="color-list hide">
-                    <li className="color-item"><span className="color-icon yellow"></span></li>
-                    <li className="color-item"><span className="color-icon red"></span></li>
-                    <li className="color-item"><span className="color-icon orange"></span></li>
-                    <li className="color-item"><span className="color-icon green"></span></li>
-                    <li className="color-item"><span className="color-icon blue"></span></li>
-                    <li className="color-item"><span className="color-icon purple"></span></li>
+                <ul className={
+                    isShowTag ? 'color-list' : 'color-list hide'
+                }>
+                    <li className="color-item"><span className="color-icon yellow" onClick={this.handleSetColor.bind(this, '#F2C53E')}></span></li>
+                    <li className="color-item"><span className="color-icon red" onClick={this.handleSetColor.bind(this, '#fc4c50')}></span></li>
+                    <li className="color-item"><span className="color-icon orange" onClick={this.handleSetColor.bind(this, '#f59739')}></span></li>
+                    <li className="color-item"><span className="color-icon green" onClick={this.handleSetColor.bind(this, '#65c43c')}></span></li>
+                    <li className="color-item"><span className="color-icon blue" onClick={this.handleSetColor.bind(this, '#4ba9f1')}></span></li>
+                    <li className="color-item"><span className="color-icon purple" onClick={this.handleSetColor.bind(this, '#c471d9')}></span></li>
+                    <li className="color-item"><span className="color-close iconfont icon-guanbi icon-guanbi-self" onClick={this.handleCloseColor.bind(this)}></span></li>
                 </ul>
             </li>
         )

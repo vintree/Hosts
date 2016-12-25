@@ -86,29 +86,52 @@
                 .color-item {
                     flex: 1;
                     line-height: 40px;  
-                    text-align: center;               
+                    text-align: center;
+                    transition: all .5s;     
                     .color-icon {
                         display: inline-table;
                         width: 15px;
                         height: 15px;
                         border-radius: 50%;
+                        cursor: pointer;
+                        &:hover {
+                            border: 1px solid #ececec !important;
+                        }
                         &.yellow {
+                            // border: 1px solid rgb(240, 197, 61);
                             background-color: rgb(240, 197, 61);
                         }
                         &.red {
+                            // border: 1px solid rgb(252, 76, 80);                            
                             background-color: rgb(252, 76, 80);
                         }
                         &.orange {
+                            // border: 1px solid rgb(245, 151, 57);
                             background-color: rgb(245, 151, 57);
                         }
                         &.green {
+                            // border: 1px solid rgb(101, 196, 60);
                             background-color: rgb(101, 196, 60);
                         }
                         &.blue {
+                            // border: 1px solid rgb(75, 169, 241);
                             background-color: rgb(75, 169, 241);
                         }
                         &.purple {
+                            // border: 1px solid rgb(196, 113, 217);
                             background-color: rgb(196, 113, 217);
+                        }
+                    }
+                    .color-close {
+                        display: inline-table;
+                        cursor: pointer;
+                        &.icon-guanbi-self {
+                            position: relative;
+                            top: -3.5px;
+                            font-size: 17px;
+                            &:hover {
+                                color: #848484;
+                            }
                         }
                     }
                 }
