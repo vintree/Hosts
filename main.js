@@ -28,7 +28,7 @@ function createWindow() {
     win.loadURL(`file://${__dirname}/app/index.html`)
 
     // 打开开发工具页面
-    win.webContents.openDevTools()
+    // win.webContents.openDevTools()
 
     require('./menu')()
     require('./tray')(win)
