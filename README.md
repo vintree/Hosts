@@ -1,5 +1,7 @@
-# Hosts
+# Hosts 
 [![Build Status](https://travis-ci.org/wuguzi/Hosts.svg?branch=master)](https://travis-ci.org/wuguzi/Hosts)
+[![Stories in Ready](https://badge.waffle.io/wuguzi/Hosts.png?label=ready&title=Ready)](http://waffle.io/wuguzi/Hosts)
+
 
 ![](https://github.com/wuguzi/Hosts/blob/master/build/Mac/icon_128x128@2x.png?raw=true)
 
