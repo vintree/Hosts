@@ -16,5 +16,8 @@ export default function updateHostFile() {
         content += splitStart + v.content
     })
     CleanSysDNS('cleanSysDNS')
-    fs.writeFileSync('/etc/hosts', content, 'utf8')
+    fs.writeFileSync('/etc/hosts', content, {
+        encoding: 'utf8',
+        mode: '0o777'
+    })
 }
