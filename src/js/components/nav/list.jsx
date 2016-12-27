@@ -132,12 +132,24 @@ class Item extends Component {
         this.setState({
             isDrag: true
         })
+        if(mouseDownT) {
+            clearTimeout(mouseDownT)
+            this.setState({
+                isShowTag: false
+            })
+        }
     }
     handleDragLeave(e) {
         e.stopPropagation()
         this.setState({
             isDrag: false
         })
+        if(mouseDownT) {
+            clearTimeout(mouseDownT)
+            this.setState({
+                isShowTag: false
+            })
+        }
     }
     handleDrop(e) {
         e.stopPropagation()
@@ -149,6 +161,12 @@ class Item extends Component {
                 dispatch(checkActiveHostAll())
             }
             updateHostFile()
+        }
+        if(mouseDownT) {
+            clearTimeout(mouseDownT)
+            this.setState({
+                isShowTag: false
+            })
         }
     }
     handleMouseDown() {
