@@ -1,3 +1,9 @@
+/**
+ *  author puxiao
+ *  time 2016-10-06
+ *  des 下载插件
+ *  */ 
+
 const electron = require('electron')
 const userData = electron.remote.app.getPath('userData')
 const fs = require('fs')

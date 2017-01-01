@@ -7,6 +7,7 @@ const electron = require('electron')
 const userData = electron.remote.app.getPath('userData')
 const mkdir = require('./mkdir')
 const download = require('./down')
+const initHosts = require('./initHost/root.js')
 // const DBHost = require('../db-model/host')
 // const DBPlugin = require('../db-model/plugin')
 function defaultDirPath() {
@@ -50,6 +51,7 @@ module.exports = {
         createTable()
         initPlugin()
         initConfigsMain()
+        initHosts()
     },
     defaultDirPath
 }

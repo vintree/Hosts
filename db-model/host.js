@@ -23,27 +23,37 @@ const db = low(DBFile, {
     async: true
 })
 
-const defaultData = {
+const defaults = {
     id: null,
     name: null,
     content: null,
-    switched: null,
-    active: null,
-    exchangeTag: false
+    switched: false,
+    active: false,
+    exchangeTag: false,
+    color: '#9e9e9e'
 }
 
+// host默认值
 function defaultValue(name, content = '') {
-    return {
-        id: uuid(),
-        name: name,
-        content: content,
-        switched: false,
-        active: false,
-        exchangeTag: false,
-        color: '#6f6f6f'
+    if(name) {
+        return Object.assign(defaults, {
+            id: uuid(),
+            name: name,
+            content: content
+        })
+        // return {
+        //     id: uuid(),
+        //     name: name,
+        //     content: content,
+        //     switched: false,
+        //     active: false,
+        //     exchangeTag: false,
+        //     color: '#6f6f6f'
+        // }
     }
 }
 
+// 默认返回构造对象
 function defaultReturn(value) {
     if(!db.has(TABLE_HOST_NAME).value()) {
         createHost()
@@ -59,15 +69,20 @@ function defaultReturn(value) {
     }
 }
 
+// 初始化创建
 function create() {
     createHost()
 }
 
-function createHost() {
-    return db.defaults({host: []})
+// 创建
+function createHost(host = []) {
+    return db.defaults({
+        host
+    })
     .value()
 }
 
+// 添加
 function addHost(name) {
     if(!db.has('host').value()) {
         createHost()
@@ -78,11 +93,13 @@ function addHost(name) {
     .value())
 }
 
+// 删除
 function delHost(id) {
     return defaultReturn(db.get(TABLE_HOST_NAME)
     .remove({id: id}).value())
 }
 
+// 更新数据，prepareData<Object>
 function update(id, prepareData) {
     if(!id) return
     return defaultReturn(db.get(TABLE_HOST_NAME)
@@ -90,21 +107,24 @@ function update(id, prepareData) {
     .assign(prepareData).value())
 }
 
+// 查找所有host
 function checkAll() {
     return defaultReturn()['1']
 }
 
+// 根据ID查找host
 function check(id) {
     return defaultReturn(db.get(TABLE_HOST_NAME)
     .filter({id: id}).value()[0])
 }
 
+// 查找所有激活host
 function checkActiveAll() {
     return defaultReturn(db.get(TABLE_HOST_NAME)
     .filter({switched: true}).value())['0']
 }
 
-// id1, id2, 
+// 修改位置，id1, id2, 
 function exchange(id, currentId) {
     const hostList = defaultReturn()[1]
     const exchanges = require('../model/exchange')
@@ -126,6 +146,8 @@ function exchange(id, currentId) {
 }
 
 module.exports =  {
+    createHost,
+    defaults,
     create,
     addHost,
     delHost,

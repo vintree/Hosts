@@ -236,6 +236,7 @@ class Item extends Component {
                 <ul className={
                     isShowTag ? 'color-list' : 'color-list hide'
                 }>
+                    <li className="color-item"><span className="color-icon default" onClick={this.updateColor.bind(this, id, '#9e9e9e')}></span></li>                
                     <li className="color-item"><span className="color-icon yellow" onClick={this.updateColor.bind(this, id, '#F2C53E')}></span></li>
                     <li className="color-item"><span className="color-icon red" onClick={this.updateColor.bind(this, id, '#fc4c50')}></span></li>
                     <li className="color-item"><span className="color-icon orange" onClick={this.updateColor.bind(this, id, '#f59739')}></span></li>

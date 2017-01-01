@@ -7,8 +7,8 @@ var fileConfig = require('./get-entry');
 var copyFile = fileConfig.copyFile()
 
 copyFile.push({
-    from: './scr/js/lib',
-    to: './dist/js/lib'
+    from: path.join(__dirname, './src/pages/loading/page.html'),
+    to: 'app/pages/loading/page.html'
 })
 
 module.exports = {

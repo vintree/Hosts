@@ -28,7 +28,7 @@ Config.copyFile = function() {
     var pageRoot = './src',
         pageList = fs.readdirSync(pageRoot),
         arr1 = []
-    pageList.forEach(function(page){
+    pageList.forEach(function(page) {
         if(page.indexOf('.html') > -1) {
             arr1.push({
                 from: `${srcDir}/${page}`,
