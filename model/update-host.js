@@ -20,9 +20,9 @@ export default function updateHostFile() {
         fs.writeSync(fd, content, 0, 'utf-8')
         fs.close(fd,function(err){
         if(err){
-            throw err;
+            throw err
         }
-            console.log('file closed');
+            // console.log('file closed')
         })
     })
     // fs.writeFileSync('/etc/hosts', content, {

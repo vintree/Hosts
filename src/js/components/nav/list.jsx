@@ -224,8 +224,7 @@ class Item extends Component {
                     {
                         inputType === 'text' ? 
                         (
-                            <div className="hosts-name">
-                                <span style={style} onDoubleClick={this.handleChangeDom.bind(this)} dangerouslySetInnerHTML={{__html: name}}></span>
+                            <div className="hosts-name" onDoubleClick={this.handleChangeDom.bind(this)} dangerouslySetInnerHTML={{__html: name}}>
                             </div>
                         ) : 
                         (<input className="update-name" type="text" defaultValue={name} onKeyUp={this.handleKeyUp.bind(this, id)} onBlur={this.handleBlur.bind(this, id)} ref="updateName" />)

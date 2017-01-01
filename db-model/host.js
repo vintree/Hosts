@@ -39,7 +39,8 @@ function defaultValue(name, content = '') {
         content: content,
         switched: false,
         active: false,
-        exchangeTag: false
+        exchangeTag: false,
+        color: '#6f6f6f'
     }
 }
 
