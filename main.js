@@ -19,12 +19,15 @@ let win = null
 let isQuit = false
 function createWindow() {
     // 创建一个新的浏览器窗口
-    win = new BrowserWindow({
-        width: 1024,
-        height: 600,
-        minWidth: 1024, 
-        minHeight: 600
-    });
+    // 防止在Mac未关闭程序重新活关机时，自动运行导致重新创建对象
+    if(!win) {
+        win = new BrowserWindow({
+            width: 1024,
+            height: 600,
+            minWidth: 1024, 
+            minHeight: 600
+        });
+    }
     win.loadURL(`file://${__dirname}/app/index.html`)
 
     // 打开开发工具页面
@@ -106,7 +109,7 @@ function createWindow() {
         app.quit()
         shortcut.unregisterAll()
     })
-
+    shortcut.cmdOrCtrl_w()
     // shell.openExternal('https://taobao.com')
     // shell.openItem(`${__dirname}/index.html`)
     // shell.beep()
@@ -131,7 +134,7 @@ app.on('window-all-closed', () => {
 app.on('activate', () => {
     // 对于OS X系统，当dock图标被点击后会重新创建一个app窗口，并且不会有其他
     if (win === null) {
-        createWindow()
+        // createWindow()
     } else {
         win.show()
     }

@@ -13,7 +13,9 @@ ipcMain.on('search-message', function (event, arg) {
 })
 
 function doRegister(cmd, callback) {
-    globalShortcut.register(cmd, callback);
+    if(!globalShortcut.isRegistered(cmd)) {
+        globalShortcut.register(cmd, callback);
+    }
 }
 
 
