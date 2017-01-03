@@ -23,33 +23,22 @@ const db = low(DBFile, {
     async: true
 })
 
-const defaults = {
-    id: null,
-    name: null,
-    content: null,
-    switched: false,
-    active: false,
-    exchangeTag: false,
+let defaults = {
     color: '#9e9e9e'
 }
 
 // host默认值
 function defaultValue(name, content = '') {
     if(name) {
-        return Object.assign(defaults, {
+        return {
             id: uuid(),
             name: name,
-            content: content
-        })
-        // return {
-        //     id: uuid(),
-        //     name: name,
-        //     content: content,
-        //     switched: false,
-        //     active: false,
-        //     exchangeTag: false,
-        //     color: '#6f6f6f'
-        // }
+            content: content,
+            switched: false,
+            active: false,
+            exchangeTag: false,
+            color: defaults['color']
+        }
     }
 }
 
@@ -84,6 +73,7 @@ function createHost(host = []) {
 
 // 添加
 function addHost(name) {
+    console.log('name', name);
     if(!db.has('host').value()) {
         createHost()
     }
