@@ -39,7 +39,6 @@ class Header extends Component {
             searchDom.value = ''
         }
     }
-
     handleKeyUp(e, type) {
         const { dispatch } = this.props
         // if(e.keyCode === 13) {
@@ -58,7 +57,6 @@ class Header extends Component {
             dispatch(filterHost(value))
         }
     }
-
     switchCreate(e) {
         const { inputType } = this.state
         const { dispatch } = this.props
@@ -73,7 +71,6 @@ class Header extends Component {
             })
         }
     }
-
     switchSearch(e) {
         const searchDom = this.refs.search
         searchDom.focus()
@@ -83,7 +80,6 @@ class Header extends Component {
             inputType: 'search'
         })
     }
-
     render() {
         const { inputType } = this.state
         return (
