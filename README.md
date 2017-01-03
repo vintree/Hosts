@@ -2,6 +2,8 @@
 [![Build Status](https://travis-ci.org/wuguzi/Hosts.svg?branch=master)](https://travis-ci.org/wuguzi/Hosts)
 [![Stories in Ready](https://badge.waffle.io/wuguzi/Hosts.png?label=ready&title=Ready)](http://waffle.io/wuguzi/Hosts)
 
+### [下载最新Hosts软件](https://github.com/wuguzi/Hosts/releases)
+
 ![](https://github.com/wuguzi/Hosts/blob/master/build/Mac/icon_32x32@2x.png?raw=true)
 
 Hosts是一个基于host的综合管理工具，其中集成了插件管理功能，可用React + nodeJs编写你喜欢的插件！
